@@ -24,7 +24,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 	},
 	psychic: {
 		inherit: true,
-		basePower: 95, // 90 → 95
+		basePower: 90,
 		secondary: {
 			chance: 33.2,
 			boosts: {
