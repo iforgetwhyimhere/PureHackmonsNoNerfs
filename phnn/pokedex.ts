@@ -167,6 +167,8 @@ export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
 	raichu: {
 		inherit: true,
 		baseStats: {hp: 60, atk: 90, def: 55, spa: 90, spd: 90, spe: 110}, // SpDef 80 → 90
+		otherFormes: ["Raichu-Alola", "Raichu-Mega-X", "Raichu-Mega-Y"],
+		formeOrder: ["Raichu", "Raichu-Alola", "Raichu-Mega-X", "Raichu-Mega-Y"],
 	},
 	sandshrew: {
 		inherit: true,
@@ -360,11 +362,6 @@ export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
 	},
 
 	// Legends Z-A DLC Mega Evolutions
-	raichu: {
-		inherit: true,
-		otherFormes: ["Raichu-Alola", "Raichu-Mega-X", "Raichu-Mega-Y"],
-		formeOrder: ["Raichu", "Raichu-Alola", "Raichu-Mega-X", "Raichu-Mega-Y"],
-	},
 	raichumegax: {
 		num: 26,
 		name: "Raichu-Mega-X",
