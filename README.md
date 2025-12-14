@@ -376,6 +376,29 @@ The Gen 1 Special stat was split into Special Attack and Special Defense in Gen 
 - **Mega Mawile**: 147 Atk
 - **Cherrim Sunshine**: 90 Atk and 117 SpDef
 
+**Legends Z-A DLC Mega Evolutions**
+
+All 19 new Mega Evolutions from the Legends Z-A DLC are now available:
+- **Mega Raichu-X** (Electric/Fighting, BST 585): Lightning Rod ability
+- **Mega Raichu-Y** (Electric/Psychic, BST 585): Surge Surfer ability
+- **Mega Chimecho** (Psychic/Steel, BST 555): Filter ability
+- **Mega Absol-Z** (Dark/Ghost, BST 565): Shadow Tag ability (alternative to standard Mega Absol)
+- **Mega Staraptor** (Fighting/Flying, BST 585): No Guard ability
+- **Mega Garchomp-Z** (Dragon, BST 700): Sheer Force ability, Speed 151 (alternative to standard Mega Garchomp)
+- **Mega Lucario-Z** (Fighting/Steel, BST 625): Adaptability ability, Speed 151 (enhanced version of Mega Lucario)
+- **Mega Heatran** (Fire/Steel, BST 700): Already available
+- **Mega Darkrai** (Dark, BST 700): Already available
+- **Mega Golurk** (Ground/Ghost, BST 583): Iron Fist ability
+- **Mega Meowstic** (Psychic, BST 566): Technician ability
+- **Mega Crabominable** (Fighting/Ice, BST 578): Iron Fist ability
+- **Mega Golisopod** (Bug/Steel, BST 630): Filter ability
+- **Mega Magearna** (Steel/Fairy, BST 700): Soul-Heart ability
+- **Mega Zeraora** (Electric, BST 700): Already available
+- **Mega Scovillain** (Grass/Fire, BST 586): Chlorophyll ability
+- **Mega Baxcalibur** (Dragon/Ice, BST 700): Thermal Exchange ability
+- **Mega Tatsugiri** (Dragon/Water, BST 575): Storm Drain ability
+- **Mega Glimmora** (Rock/Poison, BST 625): Toxic Debris ability
+
 > Mega-Zygarde (from Legends Z-A) as well as all additional Z-A Megas are now available on Showdown.
 
 ---
@@ -384,7 +407,8 @@ The Gen 1 Special stat was split into Special Attack and Special Defense in Gen 
 
 #### Power Changes
 
-- **Surf/Thunderbolt/Flamethrower/Ice Beam/Psychic/Muddy Water**: 90 → 95 BP
+- **Surf/Thunderbolt/Flamethrower/Ice Beam/Muddy Water**: 90 → 95 BP
+- **Psychic**: 90 BP
 - **Blizzard/Hydro Pump/Thunder/Fire Blast/Hurricane**: 110 → 120 BP
 - **Draco Meteor/Leaf Storm/Overheat**: 130 → 140 BP
 - **Sky Attack/Solar Beam**: → 200 BP
@@ -603,6 +627,17 @@ All signature Z-moves are back:
 
 - **Weather Abilities**: Restore permanent weather (remove turn limits) for Drizzle, Drought, Sand Stream, Snow Warning
 
+#### Generation 3→4 Ability Nerfs Reversed
+
+All contact abilities and Shed Skin had their activation rates reduced from 33% in Gen 3 to 30% in Gen 4+. This mod restores the original 33% activation rate:
+
+- **Cute Charm**: 30% → 33% chance to infatuate on contact
+- **Effect Spore**: 30% → 33% chance to inflict status (sleep/paralysis/poison) on contact
+- **Flame Body**: 30% → 33% chance to burn on contact
+- **Poison Point**: 30% → 33% chance to poison on contact
+- **Static**: 30% → 33% chance to paralyze on contact
+- **Shed Skin**: 30% → 33% chance to cure status per turn
+
 #### Earlier Generation Ability Nerfs Reversed
 
 - **Magic Guard**: Restore original mechanics where it grants immunity to being fully paralyzed and prevents poisoning from Toxic Spikes
@@ -618,6 +653,23 @@ All signature Z-moves are back:
 ---
 
 ### Item Restorations
+
+#### Pinch Berries - Activation Threshold Restored
+
+In Gen 7, pinch berries were nerfed from activating at 50% HP (1/2) to 25% HP (1/4). This mod restores the original Gen 6 activation threshold of 50% HP:
+
+**Stat-Boosting Berries:**
+- **Liechi Berry**: Raises Attack by 1 stage at 1/2 max HP (was 1/4)
+- **Ganlon Berry**: Raises Defense by 1 stage at 1/2 max HP (was 1/4)
+- **Salac Berry**: Raises Speed by 1 stage at 1/2 max HP (was 1/4)
+- **Petaya Berry**: Raises Sp. Atk by 1 stage at 1/2 max HP (was 1/4)
+- **Apicot Berry**: Raises Sp. Def by 1 stage at 1/2 max HP (was 1/4)
+
+**Special Effect Berries:**
+- **Lansat Berry**: Grants Focus Energy effect at 1/2 max HP (was 1/4)
+- **Starf Berry**: Raises random stat by 2 stages at 1/2 max HP (was 1/4)
+- **Micle Berry**: Next move has 1.2x accuracy at 1/2 max HP (was 1/4)
+- **Custap Berry**: Holder moves first in priority bracket at 1/2 max HP (was 1/4)
 
 #### Classic Items Return
 

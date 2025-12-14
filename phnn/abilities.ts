@@ -1,4 +1,78 @@
 export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTable = {
+	// Contact Abilities - Restore Gen 3 activation rate (33% instead of 30%)
+	cutecharm: {
+		inherit: true,
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				if (this.randomChance(33, 100)) {
+					source.trySetStatus('attract', target);
+				}
+			}
+		},
+		desc: "33% chance to infatuate the attacker on contact. Gen 3 value (30% in Gen 4+).",
+	},
+	effectspore: {
+		inherit: true,
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target) && !source.status && source.runStatusImmunity('powder')) {
+				const r = this.random(300);
+				if (r < 99) {
+					source.setStatus('slp', target);
+				} else if (r < 198) {
+					source.setStatus('par', target);
+				} else if (r < 297) {
+					source.setStatus('psn', target);
+				}
+			}
+		},
+		desc: "33% chance to inflict sleep, paralysis, or poison on contact. Gen 3 value (30% in Gen 4+).",
+	},
+	flamebody: {
+		inherit: true,
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				if (this.randomChance(33, 100)) {
+					source.trySetStatus('brn', target);
+				}
+			}
+		},
+		desc: "33% chance to burn the attacker on contact. Gen 3 value (30% in Gen 4+).",
+	},
+	poisonpoint: {
+		inherit: true,
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				if (this.randomChance(33, 100)) {
+					source.trySetStatus('psn', target);
+				}
+			}
+		},
+		desc: "33% chance to poison the attacker on contact. Gen 3 value (30% in Gen 4+).",
+	},
+	static: {
+		inherit: true,
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				if (this.randomChance(33, 100)) {
+					source.trySetStatus('par', target);
+				}
+			}
+		},
+		desc: "33% chance to paralyze the attacker on contact. Gen 3 value (30% in Gen 4+).",
+	},
+	shedskin: {
+		inherit: true,
+		onResidualOrder: 5,
+		onResidualSubOrder: 3,
+		onResidual(pokemon) {
+			if (pokemon.hp && pokemon.status && this.randomChance(33, 100)) {
+				this.debug('shed skin');
+				this.add('-activate', pokemon, 'ability: Shed Skin');
+				pokemon.cureStatus();
+			}
+		},
+		desc: "33% chance to cure status at the end of each turn. Gen 3 value (30% in Gen 4+).",
+	},
 	aerilate: {
 		// Restore original 1.3x damage multiplier
 		inherit: true,
@@ -196,5 +270,45 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 				return this.chainModify(1.5);
 			}
 		},
-	},	
+	},
+	prankster: {
+		// Remove Dark-type immunity (Gen 7 nerf) - restore Gen 6 behavior
+		inherit: true,
+		onModifyPriority(priority, pokemon, target, move) {
+			if (move?.category === 'Status') {
+				move.pranksterBoosted = true;
+				return priority + 1;
+			}
+		},
+		desc: "Status moves gain +1 priority. Gen 6 value (Dark-types not immune).",
+	},
+	// Weather Abilities - Restore permanent weather (Gen 5) instead of 5-turn limit (Gen 6+)
+	drizzle: {
+		inherit: true,
+		onStart(source) {
+			this.field.setWeather('raindance');
+		},
+		desc: "On switch-in, summons permanent Rain Dance. Gen 5 value (5 turns in Gen 6+).",
+	},
+	drought: {
+		inherit: true,
+		onStart(source) {
+			this.field.setWeather('sunnyday');
+		},
+		desc: "On switch-in, summons permanent Sunny Day. Gen 5 value (5 turns in Gen 6+).",
+	},
+	snowwarning: {
+		inherit: true,
+		onStart(source) {
+			this.field.setWeather('snow');
+		},
+		desc: "On switch-in, summons permanent Snow. Gen 5 value (5 turns in Gen 6+).",
+	},
+	sandstream: {
+		inherit: true,
+		onStart(source) {
+			this.field.setWeather('sandstorm');
+		},
+		desc: "On switch-in, summons permanent Sandstorm. Gen 5 value (5 turns in Gen 6+).",
+	},
 };
