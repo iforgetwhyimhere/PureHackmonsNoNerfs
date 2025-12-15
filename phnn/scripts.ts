@@ -242,17 +242,7 @@ export const Scripts: ModdedBattleScriptsData = {
 			// Allow any Pokemon to use Aura Wheel (default to Electric type)
 			if (!move.type) move.type = 'Electric';
 		}
-		
-		// Multi-hit moves modifications (Gen 1 mechanics)
-		if (['doublekick', 'barrage', 'furyattack', 'pinmissile', 'twineedle', 'cometpunch', 'furyswipes', 'spikecannon'].includes(move.id)) {
-			// Each hit always deals the same damage; subsequent hits will crit if the 1st one did
-			// BUT ends immediately if it breaks a substitute
-			move.onAfterSubDamage = function(damage, target, source, move) {
-				// End multihit if substitute is broken
-				source.volatiles['lockedmove'] = null;
-			};
-		}
-		
+
 		// Binding moves (Gen 1 mechanics)
 		if (['bind', 'wrap', 'clamp', 'firespin'].includes(move.id)) {
 			// Lasting 2-5 turns, dealing regular 15 BP damage, target unable to attack/switch
