@@ -601,6 +601,11 @@ The following G-Max moves for Galar starters are now properly implemented with t
 
 These signature Gigantamax moves now deal proper damage and ignore defensive abilities like Solid Rock, Filter, and Multiscale.
 
+**Special Mechanics:**
+- These moves break through Protect, Detect, King's Shield, Spiky Shield, Baneful Bunker, and Obstruct, dealing **25% damage** through the protection
+- **Max Guard** fully blocks these moves (and Z-moves) with 0% damage
+- Max Guard is now usable as a regular move (5 PP, doesn't require Dynamax)
+
 #### Move Restrictions Removed
 
 - **All signature moves**: Remove species locks - any Pokémon can learn any move (EXPERIMENTAL)
