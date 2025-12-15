@@ -55,60 +55,6 @@ export const Scripts: ModdedBattleScriptsData = {
 			}
 			return false;
 		},
-
-		// Let's Go Pikachu/Eevee: Allow certain Pokemon to mega evolve without stones
-		canMegaEvo() {
-			// List of Pokemon that can mega evolve without stones (Let's Go LGPE)
-			const letsGoMegas = [
-				'aerodactyl', 'beedrill', 'blastoise', 'gyarados', 'kangaskhan',
-				'pidgeot', 'pinsir', 'slowbro', 'venusaur', 'charizard', 'mewtwo'
-			];
-
-			const speciesid = this.baseSpecies.id;
-
-			// Check if this is a Let's Go mega-capable Pokemon (can mega without stone)
-			if (letsGoMegas.includes(speciesid)) {
-				// For Charizard and Mewtwo, default to Mega Y (X can be selected separately)
-				if (speciesid === 'charizard') {
-					return 'Charizard-Mega-Y';
-				}
-				if (speciesid === 'mewtwo') {
-					return 'Mewtwo-Mega-Y';
-				}
-				// For other Pokemon, find their mega forme
-				const megaSpecies = this.battle.dex.species.get(speciesid + 'mega');
-				if (megaSpecies.exists) {
-					return megaSpecies.name;
-				}
-			}
-
-			// Fall back to default mega evolution logic (with stone)
-			return this.constructor.prototype.canMegaEvo?.call(this);
-		},
-
-		// Handle Mega X selection for Charizard and Mewtwo
-		canMegaEvoX() {
-			const speciesid = this.baseSpecies.id;
-			if (speciesid === 'charizard') {
-				return 'Charizard-Mega-X';
-			}
-			if (speciesid === 'mewtwo') {
-				return 'Mewtwo-Mega-X';
-			}
-			return null;
-		},
-
-		// Handle Mega Y selection for Charizard and Mewtwo
-		canMegaEvoY() {
-			const speciesid = this.baseSpecies.id;
-			if (speciesid === 'charizard') {
-				return 'Charizard-Mega-Y';
-			}
-			if (speciesid === 'mewtwo') {
-				return 'Mewtwo-Mega-Y';
-			}
-			return null;
-		},
 	},
 	
 	// Battle mechanics modifications

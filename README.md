@@ -741,9 +741,9 @@ Gen 9 type chart except:
 - **Grassy Terrain**: Boosts Grass-type moves by 50% (was 30%)
 - **Psychic Terrain**: Boosts Psychic-type moves by 50% (was 30%)
 
-#### Let's Go Pikachu/Eevee Mega Evolution
+#### Let's Go Pikachu/Eevee Mega Evolution *(In Progress - Not Yet Implemented)*
 
-In Let's Go Pikachu and Eevee, Mega Evolution doesn't require holding a Mega Stone. The following Pokémon can Mega Evolve without needing to hold a stone:
+In Let's Go Pikachu and Eevee, Mega Evolution doesn't require holding a Mega Stone. The following Pokémon would be able to Mega Evolve without needing to hold a stone:
 
 - **Aerodactyl** → Mega Aerodactyl
 - **Beedrill** → Mega Beedrill
@@ -757,7 +757,9 @@ In Let's Go Pikachu and Eevee, Mega Evolution doesn't require holding a Mega Sto
 - **Charizard** → Mega Charizard X or Y (player can choose)
 - **Mewtwo** → Mega Mewtwo X or Y (player can choose)
 
-This allows these Pokémon to hold any item while still being able to Mega Evolve, similar to how Rayquaza can Mega Evolve without a stone.
+This would allow these Pokémon to hold any item while still being able to Mega Evolve, similar to how Rayquaza can Mega Evolve without a stone.
+
+> **Note**: This feature is planned but not currently implemented in the mod.
 
 ---
 
