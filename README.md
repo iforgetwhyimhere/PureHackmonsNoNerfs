@@ -668,23 +668,6 @@ All contact abilities and Shed Skin had their activation rates reduced from 33% 
 
 ### Item Restorations
 
-#### Pinch Berries - Activation Threshold Restored
-
-In Gen 7, pinch berries were nerfed from activating at 50% HP (1/2) to 25% HP (1/4). This mod restores the original Gen 6 activation threshold of 50% HP:
-
-**Stat-Boosting Berries:**
-- **Liechi Berry**: Raises Attack by 1 stage at 1/2 max HP (was 1/4)
-- **Ganlon Berry**: Raises Defense by 1 stage at 1/2 max HP (was 1/4)
-- **Salac Berry**: Raises Speed by 1 stage at 1/2 max HP (was 1/4)
-- **Petaya Berry**: Raises Sp. Atk by 1 stage at 1/2 max HP (was 1/4)
-- **Apicot Berry**: Raises Sp. Def by 1 stage at 1/2 max HP (was 1/4)
-
-**Special Effect Berries:**
-- **Lansat Berry**: Grants Focus Energy effect at 1/2 max HP (was 1/4)
-- **Starf Berry**: Raises random stat by 2 stages at 1/2 max HP (was 1/4)
-- **Micle Berry**: Next move has 1.2x accuracy at 1/2 max HP (was 1/4)
-- **Custap Berry**: Holder moves first in priority bracket at 1/2 max HP (was 1/4)
-
 #### Classic Items Return
 
 1. **Berserk Gene** 🧬
