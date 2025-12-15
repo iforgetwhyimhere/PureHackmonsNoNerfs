@@ -511,19 +511,31 @@ clangoroussoulblaze: {
 	gmaxdrumsolo: {
 		inherit: true,
 		basePower: 160,
+		basePowerCallback(pokemon, target, move) {
+			return 160; // Force 160 BP regardless of Max Move mechanics
+		},
 		pp: 5,
 		ignoreAbility: true,
+		isMax: false, // Don't treat as Max Move for damage calculation
 	},
 	gmaxfireball: {
 		inherit: true,
 		basePower: 160,
+		basePowerCallback(pokemon, target, move) {
+			return 160; // Force 160 BP regardless of Max Move mechanics
+		},
 		pp: 5,
 		ignoreAbility: true,
+		isMax: false, // Don't treat as Max Move for damage calculation
 	},
 	gmaxhydrosnipe: {
 		inherit: true,
 		basePower: 160,
+		basePowerCallback(pokemon, target, move) {
+			return 160; // Force 160 BP regardless of Max Move mechanics
+		},
 		pp: 5,
 		ignoreAbility: true,
+		isMax: false, // Don't treat as Max Move for damage calculation
 	},
 };
