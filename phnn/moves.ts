@@ -506,4 +506,24 @@ clangoroussoulblaze: {
         	}
     	},
 	},
+
+	// G-Max Moves - Fixed BP and ignore abilities
+	gmaxdrumsolo: {
+		inherit: true,
+		basePower: 160,
+		pp: 5,
+		ignoreAbility: true,
+	},
+	gmaxfireball: {
+		inherit: true,
+		basePower: 160,
+		pp: 5,
+		ignoreAbility: true,
+	},
+	gmaxhydrosnipe: {
+		inherit: true,
+		basePower: 160,
+		pp: 5,
+		ignoreAbility: true,
+	},
 };

@@ -591,6 +591,16 @@ All signature Z-moves are back:
 
 - **Nihil Light**: 200 BP, 100% accuracy, ignores stat/sp def boosts AND hits fairies/ignores dragon immunity (Credit to Icy for figuring out a fix for this, as it currently doesn't work as intended in the original source code.)
 
+#### G-Max Moves (Gen 8)
+
+The following G-Max moves for Galar starters are now properly implemented with their correct stats:
+
+- **G-Max Drum Solo** (Rillaboom): 160 BP, 5 PP, ignores abilities
+- **G-Max Fireball** (Cinderace): 160 BP, 5 PP, ignores abilities
+- **G-Max Hydrosnipe** (Inteleon): 160 BP, 5 PP, ignores abilities
+
+These signature Gigantamax moves now deal proper damage and ignore defensive abilities like Solid Rock, Filter, and Multiscale.
+
 #### Move Restrictions Removed
 
 - **All signature moves**: Remove species locks - any Pokémon can learn any move (EXPERIMENTAL)
@@ -831,7 +841,7 @@ So why Will-O-Wisp, and why now? We actually put this to a vote, and while we wi
 
 It might be inconsistent or arbitrary for us to only serve Will-O-Wisp, but ultimately this was interesting enough of an idea for the community that we're trying it out. It's the same notion for Overflow. We put Emax to a vote, and most everyone unanimously wanted Overflow banned but it was OK to keep Emax, even though Dynamaxed Pokemon is not something that is easy to implement in Gen 9.
 
-Other things we are exploring are the G-max moves in Gen 8. The only reason these have not been implemented yet is because, quite frankly it would be a lot to really think about, they are very powerful moves, and we are still experimenting with what works and what doesn't work. For simplicity's sake, we have not set parameters on G-moves to 160 BP, but that is certainly something that is open for discussion in future updates.
+The three Galar starter G-Max moves (Drum Solo, Fireball, and Hydrosnipe) have been implemented with 160 BP and ability-ignoring properties. Other G-Max moves are still under exploration and may be added in future updates.
 
 Another comment about design philosophy: We are not against the idea of implementing Glitches. There are several Glitchmons such as MissingNo. or glitch moves or items that we could definitely consider. Stat Overflow is an unintended glitch that was never meant to happen, but glitches are fair game, though they are still relegated to Theorymon-level PHNN due to practicality.
 
