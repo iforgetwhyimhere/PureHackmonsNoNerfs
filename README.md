@@ -364,6 +364,9 @@ The Gen 1 Special stat was split into Special Attack and Special Defense in Gen 
 - **Chi-Yu**: 145 SpAtk
 - **Ting-Lu**: 165 HP, 130 Def, 55 SpAtk
 
+**Additional Stat Buffs**
+- **Cresselia**: Def 110 → 120, SpDef 120 → 130
+
 #### Return of Unavailable Pokémon
 
 - **PokéStar Studio Pokémon** (All 600 BST / Gen 5): Black Belt, Black Door, Brycen-Man, F-00, Humanoid, Majin, MT, MT2, Monica, Monster, Transport, UFO, UFO 2, White Door

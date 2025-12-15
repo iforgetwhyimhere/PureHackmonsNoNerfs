@@ -361,6 +361,12 @@ export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
 		baseStats: {hp: 55, atk: 80, def: 80, spa: 145, spd: 120, spe: 100}, // 145 SpAtk
 	},
 
+	// Cresselia buff
+	cresselia: {
+		inherit: true,
+		baseStats: {hp: 120, atk: 70, def: 120, spa: 75, spd: 130, spe: 85}, // Def 110 → 120, SpDef 120 → 130
+	},
+
 	// Legends Z-A DLC Mega Evolutions
 	raichumegax: {
 		num: 26,
