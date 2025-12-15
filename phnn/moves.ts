@@ -517,6 +517,17 @@ clangoroussoulblaze: {
 		pp: 5,
 		ignoreAbility: true,
 		isMax: false, // Don't treat as Max Move for damage calculation
+		isZOrMaxPowered: true, // Allow breaking through protect with 25% damage
+		onTryHit(target, source, move) {
+			// Break through Protect/Detect/etc. but NOT Max Guard
+			if (target.volatiles['protect'] || target.volatiles['detect'] ||
+			    target.volatiles['kingsshield'] || target.volatiles['spikyshield'] ||
+			    target.volatiles['banefulbunker'] || target.volatiles['obstruct']) {
+				// These protection moves get broken through
+				target.getMoveHitData(move).zBrokeProtect = true;
+			}
+			// Max Guard blocks completely (no special handling, just let it block)
+		},
 	},
 	gmaxfireball: {
 		inherit: true,
@@ -527,6 +538,17 @@ clangoroussoulblaze: {
 		pp: 5,
 		ignoreAbility: true,
 		isMax: false, // Don't treat as Max Move for damage calculation
+		isZOrMaxPowered: true, // Allow breaking through protect with 25% damage
+		onTryHit(target, source, move) {
+			// Break through Protect/Detect/etc. but NOT Max Guard
+			if (target.volatiles['protect'] || target.volatiles['detect'] ||
+			    target.volatiles['kingsshield'] || target.volatiles['spikyshield'] ||
+			    target.volatiles['banefulbunker'] || target.volatiles['obstruct']) {
+				// These protection moves get broken through
+				target.getMoveHitData(move).zBrokeProtect = true;
+			}
+			// Max Guard blocks completely (no special handling, just let it block)
+		},
 	},
 	gmaxhydrosnipe: {
 		inherit: true,
@@ -537,5 +559,23 @@ clangoroussoulblaze: {
 		pp: 5,
 		ignoreAbility: true,
 		isMax: false, // Don't treat as Max Move for damage calculation
+		isZOrMaxPowered: true, // Allow breaking through protect with 25% damage
+		onTryHit(target, source, move) {
+			// Break through Protect/Detect/etc. but NOT Max Guard
+			if (target.volatiles['protect'] || target.volatiles['detect'] ||
+			    target.volatiles['kingsshield'] || target.volatiles['spikyshield'] ||
+			    target.volatiles['banefulbunker'] || target.volatiles['obstruct']) {
+				// These protection moves get broken through
+				target.getMoveHitData(move).zBrokeProtect = true;
+			}
+			// Max Guard blocks completely (no special handling, just let it block)
+		},
+	},
+
+	// Max Guard - Make it usable as a regular move
+	maxguard: {
+		inherit: true,
+		isMax: false, // Don't treat as Max Move for PP/usage
+		pp: 5, // Give it reasonable PP
 	},
 };
