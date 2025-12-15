@@ -368,6 +368,8 @@ The Gen 1 Special stat was split into Special Attack and Special Defense in Gen 
 
 - **PokéStar Studio Pokémon** (All 600 BST / Gen 5): Black Belt, Black Door, Brycen-Man, F-00, Humanoid, Majin, MT, MT2, Monica, Monster, Transport, UFO, UFO 2, White Door
 - **Eternatus-Eternamax** (Gen 8) 🌟
+- **MissingNo.** (Gen 1 Glitch Pokémon): Available with its original **Normal/Bird** typing
+  - **Important**: You **cannot** Terastallize into Bird type (Bird type only exists on MissingNo.)
 
 **Legends Z-A Stats to account for Huge Power / Pure Power**
 - **Meditite**: 56 Atk
@@ -513,7 +515,6 @@ All 19 new Mega Evolutions from the Legends Z-A DLC are now available:
 - **Leech Seed + Toxic**: Synergy from RBY returns (stacking damage!)
 - **Amnesia**: Raises user's Special Defense AND Special Attack by two stages
 - **Seismic Toss/Night Shade/Super Fang/SonicBoom/Counter/Bide**: Hits Ghost/Normal/Psychic types
-- **Multi-hit moves** (Double Kick, Barrage, Fury Attack, Pin Missile, etc.): Each hit always deals the same damage; subsequent hits will crit if the 1st one did, BUT ends immediately if it breaks a substitute (Gen 1)
 - **Bind/Wrap/Clamp/Fire Spin**: Lasting 2-5 turns, dealing regular 15 BP damage, target unable to attack/switch (Gen 1)
 - **Swift/Bide**: Hits during invulnerable Dig/Fly
 - **Defog**: Can lower Evasion of target behind a substitute
@@ -601,6 +602,11 @@ The following G-Max moves for Galar starters are now properly implemented with t
 
 These signature Gigantamax moves now deal proper damage and ignore defensive abilities like Solid Rock, Filter, and Multiscale.
 
+**Special Mechanics:**
+- These moves break through Protect, Detect, King's Shield, Spiky Shield, Baneful Bunker, and Obstruct, dealing **25% damage** through the protection
+- **Max Guard** fully blocks these moves (and Z-moves) with 0% damage
+- Max Guard is now usable as a regular move (5 PP, doesn't require Dynamax)
+
 #### Move Restrictions Removed
 
 - **All signature moves**: Remove species locks - any Pokémon can learn any move (EXPERIMENTAL)
@@ -663,23 +669,6 @@ All contact abilities and Shed Skin had their activation rates reduced from 33% 
 ---
 
 ### Item Restorations
-
-#### Pinch Berries - Activation Threshold Restored
-
-In Gen 7, pinch berries were nerfed from activating at 50% HP (1/2) to 25% HP (1/4). This mod restores the original Gen 6 activation threshold of 50% HP:
-
-**Stat-Boosting Berries:**
-- **Liechi Berry**: Raises Attack by 1 stage at 1/2 max HP (was 1/4)
-- **Ganlon Berry**: Raises Defense by 1 stage at 1/2 max HP (was 1/4)
-- **Salac Berry**: Raises Speed by 1 stage at 1/2 max HP (was 1/4)
-- **Petaya Berry**: Raises Sp. Atk by 1 stage at 1/2 max HP (was 1/4)
-- **Apicot Berry**: Raises Sp. Def by 1 stage at 1/2 max HP (was 1/4)
-
-**Special Effect Berries:**
-- **Lansat Berry**: Grants Focus Energy effect at 1/2 max HP (was 1/4)
-- **Starf Berry**: Raises random stat by 2 stages at 1/2 max HP (was 1/4)
-- **Micle Berry**: Next move has 1.2x accuracy at 1/2 max HP (was 1/4)
-- **Custap Berry**: Holder moves first in priority bracket at 1/2 max HP (was 1/4)
 
 #### Classic Items Return
 
@@ -751,6 +740,24 @@ Gen 9 type chart except:
 - **Electric Terrain**: Boosts Electric-type moves by 50% (was 30%)
 - **Grassy Terrain**: Boosts Grass-type moves by 50% (was 30%)
 - **Psychic Terrain**: Boosts Psychic-type moves by 50% (was 30%)
+
+#### Let's Go Pikachu/Eevee Mega Evolution
+
+In Let's Go Pikachu and Eevee, Mega Evolution doesn't require holding a Mega Stone. The following Pokémon can Mega Evolve without needing to hold a stone:
+
+- **Aerodactyl** → Mega Aerodactyl
+- **Beedrill** → Mega Beedrill
+- **Blastoise** → Mega Blastoise
+- **Gyarados** → Mega Gyarados
+- **Kangaskhan** → Mega Kangaskhan
+- **Pidgeot** → Mega Pidgeot
+- **Pinsir** → Mega Pinsir
+- **Slowbro** → Mega Slowbro
+- **Venusaur** → Mega Venusaur
+- **Charizard** → Mega Charizard X or Y (player can choose)
+- **Mewtwo** → Mega Mewtwo X or Y (player can choose)
+
+This allows these Pokémon to hold any item while still being able to Mega Evolve, similar to how Rayquaza can Mega Evolve without a stone.
 
 ---
 
