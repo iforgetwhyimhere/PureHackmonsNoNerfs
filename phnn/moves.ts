@@ -578,4 +578,41 @@ clangoroussoulblaze: {
 		isMax: false, // Don't treat as Max Move for PP/usage
 		pp: 5, // Give it reasonable PP
 	},
+
+	// Let's Go Partner Eevee Moves
+	bouncybubble: {
+		inherit: true,
+		basePower: 90,
+	},
+	buzzybuzz: {
+		inherit: true,
+		basePower: 90,
+	},
+	sizzlyslide: {
+		inherit: true,
+		basePower: 90,
+	},
+	glitzyglow: {
+		inherit: true,
+		basePower: 90,
+	},
+	baddybad: {
+		inherit: true,
+		basePower: 90,
+	},
+	sappyseed: {
+		inherit: true,
+		basePower: 100,
+		accuracy: 100,
+	},
+	freezyfrost: {
+		inherit: true,
+		basePower: 100,
+		accuracy: 100,
+	},
+	sparklyswirl: {
+		inherit: true,
+		basePower: 120,
+		accuracy: 100,
+	},
 };
