@@ -575,14 +575,14 @@ All signature Z-moves are back:
 - Pika Papow
 
 **Partner Eevee Moves:**
-- Bouncy Bubble
-- Buzzy Buzz
-- Sizzly Slide
-- Glitzy Glow
-- Baddy Bad
-- Sappy Seed (100 BP, 90% acc)
-- Freezy Frost (100 BP, 10 PP)
-- Sparkly Swirl (120 BP, 85% acc)
+- Bouncy Bubble (90 BP)
+- Buzzy Buzz (90 BP)
+- Sizzly Slide (90 BP)
+- Glitzy Glow (90 BP)
+- Baddy Bad (90 BP)
+- Sappy Seed (100 BP, 100% acc)
+- Freezy Frost (100 BP, 100% acc)
+- Sparkly Swirl (120 BP, 100% acc)
 - Veevee Volley
 
 #### Legends: Arceus Exclusive Moves
