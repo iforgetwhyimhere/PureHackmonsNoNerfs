@@ -23,7 +23,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	///////////////////////////////////////////////////////////////////
 
 {
-	section: "No Nerfs Formats",
+	section: "Hackmons Formats",
 },
 {
 	name: "[Gen 9] Pure Hackmons No Nerfs",
