@@ -129,6 +129,72 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		this.add('raw|<div class="broadcast-blue"><strong>Pure Hackmons No Nerfs</strong><br />Every move is legal, every ability is legal, and every Pokemon across all generations can be played at their peak!</div>');
 	},
 },
+{
+	name: "[Gen 1] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen1',
+	ruleset: ['-Nonexistent', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 2] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen2',
+	ruleset: ['-Nonexistent', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 3] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen3',
+	ruleset: ['-Nonexistent', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 4] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen4',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 5] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen5',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 6] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen6',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 7] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen7',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 8] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen8',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 9] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen9',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 7 Let's Go] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen7letsgo',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
+{
+	name: "[Gen 8 BDSP] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen8bdsp',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
+},
 	// S/V Singles
 	///////////////////////////////////////////////////////////////////
 
