@@ -195,6 +195,24 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	mod: 'gen8bdsp',
 	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
 },
+{
+	name: "[Gen 9] Wondrous Hackmons",
+	desc: "A custom Hackmons format with select bans for a balanced experience.",
+	mod: 'gen9',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'Forme Clause', 'Freeze Clause Mod', 'Sleep Clause Mod', 'Dry Pass Clause'],
+	banlist: [
+		'Arena Trap', 'Innards Out', 'Last Respects', 'Neutralizing Gas', 'Revival Blessing', 'Shadow Tag', 'Shed Tail',
+	],
+},
+{
+	name: "[Gen 8] Wondrous Hackmons",
+	desc: "A custom Hackmons format with select bans for a balanced experience.",
+	mod: 'gen8',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'Freeze Clause Mod', 'Sleep Moves Clause'],
+	banlist: [
+		'Arena Trap', 'Eternatus-Eternamax', 'Neutralizing Gas', 'Shadow Tag', 'Zacian-Crowned',
+	],
+},
 	// S/V Singles
 	///////////////////////////////////////////////////////////////////
 
