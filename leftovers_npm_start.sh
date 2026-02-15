@@ -1,13 +1,25 @@
 #!/bin/bash
 
+# Load environment variables from .env file
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ -f "$SCRIPT_DIR/leftovers-again/.env" ]; then
+    set -a
+    source "$SCRIPT_DIR/leftovers-again/.env"
+    set +a
+else
+    echo "Error: leftovers-again/.env not found."
+    echo "Copy leftovers-again/.env.example to leftovers-again/.env and fill in your values."
+    exit 1
+fi
+
 # Create a temporary script that activates the environment and starts the bot
-cat > /tmp/leftovers_start.sh << 'INNER_EOF'
+cat > /tmp/leftovers_start.sh << INNER_EOF
 #!/bin/bash
-source /home/gyarados/Programming/Games/Pokemon/PureHackmonsNoNerfs/venv/leftovers-again/bin/activate
+source ${PROJECT_DIR}/venv/leftovers-again/bin/activate
 unset NPM_CONFIG_PREFIX
 unset npm_config_prefix
-export BOT_NICKNAME=Multibot
-cd /home/gyarados/Programming/Games/Pokemon/PureHackmonsNoNerfs/leftovers-again
+export BOT_NICKNAME=${BOT_NICKNAME}
+cd ${PROJECT_DIR}/leftovers-again
 
 echo "=========================================="
 echo "Installing dependencies..."
