@@ -36,6 +36,7 @@
   - [Mechanics Restorations](#mechanics-restorations)
   - [Format Rules](#format-rules)
 - [Contributors](#contributors)
+- [Forking & Maintaining Your Own Copy](#forking--maintaining-your-own-copy)
 - [Additional Information](#additional-information)
 
 ---
@@ -96,9 +97,18 @@ PureHackmonsNoNerfs/
 └── README.md
 ```
 
-The `pokemon-showdown/` directory is a [git subtree](https://www.atlassian.com/git/tutorials/git-subtree) of the official [smogon/pokemon-showdown](https://github.com/smogon/pokemon-showdown) repository. This means the full showdown source code lives directly in this repo, with our PHNN customizations applied on top. No separate cloning required.
+This repo is a **quad-fork** — it bundles four upstream repositories into a single project so everything needed for Pure Hackmons No Nerfs lives in one place:
 
-The `pokemon-showdown-client/` and `Pokemon-Showdown-Dex/` directories are backup clones of the official [Pokémon Showdown Client](https://github.com/smogon/pokemon-showdown-client) and [Pokémon Showdown Dex](https://github.com/Zarel/Pokemon-Showdown-Dex) repositories, respectively. These are **not required** for running PHNN, but are included as reference material in case they are useful for future development (e.g., client-side UI modifications, dex data lookups, or debugging).
+| Directory | Upstream Source | How It's Tracked | Role |
+|---|---|---|---|
+| `pokemon-showdown/` | [smogon/pokemon-showdown](https://github.com/smogon/pokemon-showdown) | **git subtree** | The game server. Our PHNN mod (`data/mods/phnn/`) and custom `config/formats.ts` are applied on top. |
+| `leftovers-again/` | [dramamine/leftovers-again](https://github.com/dramamine/leftovers-again) | **git subtree** (modified fork) | AI bot framework, updated to support modern Showdown and pre-loaded with PHNN teams. |
+| `pokemon-showdown-client/` | [smogon/pokemon-showdown-client](https://github.com/smogon/pokemon-showdown-client) | **git submodule** | Backup of the official Showdown web client. Not required for PHNN, but included as reference for potential client-side UI modifications. |
+| `Pokemon-Showdown-Dex/` | [Zarel/Pokemon-Showdown-Dex](https://github.com/Zarel/Pokemon-Showdown-Dex) | **git submodule** | Backup of the official Showdown Dex site. Not required for PHNN, but included as reference for dex data lookups or debugging. |
+
+All four upstream repos can be independently updated. If you fork or clone this repo, see [**MAINTENANCE.md**](MAINTENANCE.md) for instructions on how to pull upstream updates, set up the required git remotes, and resolve merge conflicts.
+
+> **Note for forkers:** Git remotes are local config and don't travel with the repo. After a fresh clone/fork, you'll need to add the upstream remotes manually — `MAINTENANCE.md` has the exact commands.
 
 ---
 
@@ -955,6 +965,32 @@ It might be inconsistent or arbitrary for us to only serve Will-O-Wisp, but ulti
 The three Galar starter G-Max moves (Drum Solo, Fireball, and Hydrosnipe) have been implemented with 160 BP and ability-ignoring properties. Other G-Max moves are still under exploration and may be added in future updates.
 
 Another comment about design philosophy: We are not against the idea of implementing Glitches. There are several Glitchmons such as MissingNo. or glitch moves or items that we could definitely consider. Stat Overflow is an unintended glitch that was never meant to happen, but glitches are fair game, though they are still relegated to Theorymon-level PHNN due to practicality.
+
+---
+
+## 🔧 Forking & Maintaining Your Own Copy
+
+If you fork this repo, you're inheriting a **quad-fork** — four upstream repositories bundled together. To keep your fork up to date and understand how everything fits together, **please read [`MAINTENANCE.md`](MAINTENANCE.md)**. It covers:
+
+- How each of the four upstream repos is tracked (subtree vs submodule)
+- Exact commands to pull the latest updates from each upstream
+- How to set up the required git remotes after a fresh clone (they don't travel with the repo)
+- How to resolve merge conflicts when upstream Showdown changes touch our customizations
+- A full "update everything at once" reference script
+- Troubleshooting common issues
+
+**After cloning/forking, run these to set up upstream remotes:**
+
+```bash
+git remote add upstream-showdown https://github.com/smogon/pokemon-showdown.git
+git remote add upstream-leftovers https://github.com/dramamine/leftovers-again.git
+```
+
+**To initialize the backup submodules (client & dex):**
+
+```bash
+git submodule update --init --recursive
+```
 
 ---
 
