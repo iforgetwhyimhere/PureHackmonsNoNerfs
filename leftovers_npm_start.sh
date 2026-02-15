@@ -3,11 +3,19 @@
 # Create a temporary script that activates the environment and starts the bot
 cat > /tmp/leftovers_start.sh << 'INNER_EOF'
 #!/bin/bash
-source /<YOUR_DIRECTORY>/venv/leftovers-again/bin/activate
+source /home/gyarados/Programming/Games/Pokemon/PureHackmonsNoNerfs/venv/leftovers-again/bin/activate
 unset NPM_CONFIG_PREFIX
 unset npm_config_prefix
-cd /<YOUR_DIRECTORY>/leftovers-again
+export BOT_NICKNAME=Multibot
+cd /home/gyarados/Programming/Games/Pokemon/PureHackmonsNoNerfs/leftovers-again
 
+echo "=========================================="
+echo "Installing dependencies..."
+echo "=========================================="
+echo ""
+npm install
+
+echo ""
 echo "=========================================="
 echo "Starting leftovers-again bot..."
 echo "=========================================="
