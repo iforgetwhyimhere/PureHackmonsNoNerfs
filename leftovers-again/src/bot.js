@@ -10,7 +10,7 @@ class MultiFormatBot {
       accepts: 'ALL', // Accept all formats
       format: null,
       version: '2.0',
-      nickname: 'MultiBot',
+      nickname: process.env.BOT_NICKNAME || 'MultiBot',
     };
     
     // Store complete 6-Pokemon teams organized by format
