@@ -1,0 +1,15 @@
+# Python virtual environment
+venv/
+
+# Node modules (if installed at top level)
+node_modules/
+
+# OS files
+.DS_Store
+*.swp
+*~
+
+# IDE
+.idea/
+.vscode/
+.vs/
