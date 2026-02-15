@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-export NODE_PATH='/home/gyarados/leftovers-again/lib/node_modules'
-export NPM_CONFIG_PREFIX='/home/gyarados/leftovers-again'
-export npm_config_prefix='/home/gyarados/leftovers-again'
-exec '/home/gyarados/leftovers-again/bin/node' "$@"
