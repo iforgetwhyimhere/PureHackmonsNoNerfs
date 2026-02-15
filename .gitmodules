@@ -1,0 +1,6 @@
+[submodule "pokemon-showdown-client"]
+	path = pokemon-showdown-client
+	url = https://github.com/smogon/pokemon-showdown-client.git
+[submodule "Pokemon-Showdown-Dex"]
+	path = Pokemon-Showdown-Dex
+	url = https://github.com/Zarel/Pokemon-Showdown-Dex.git

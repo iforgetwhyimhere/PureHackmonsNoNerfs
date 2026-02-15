@@ -1,0 +1,18 @@
+# Environment variables (contains nicknames, passwords, etc.)
+.env
+
+# Python virtual environment
+venv/
+
+# Node modules (if installed at top level)
+node_modules/
+
+# OS files
+.DS_Store
+*.swp
+*~
+
+# IDE
+.idea/
+.vscode/
+.vs/

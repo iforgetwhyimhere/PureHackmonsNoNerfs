@@ -19,9 +19,13 @@
 
 - [Introduction](#introduction)
 - [Core Principles](#core-principles)
+- [Repository Structure](#repository-structure)
 - [Installation & Setup](#installation--setup)
   - [Prerequisites](#prerequisites)
-  - [Local Installation](#local-installation)
+  - [Quick Start](#quick-start)
+  - [Detailed Setup](#detailed-setup)
+  - [Leftovers-Again Bot Setup (Optional)](#leftovers-again-bot-setup-optional)
+  - [Keeping Up with Upstream Showdown](#keeping-up-with-upstream-showdown)
   - [Making Your Server Public with Cloudflare](#making-your-server-public-with-cloudflare)
 - [Format Details](#format-details)
   - [Pokémon Restorations](#pokémon-restorations)
@@ -32,6 +36,7 @@
   - [Mechanics Restorations](#mechanics-restorations)
   - [Format Rules](#format-rules)
 - [Contributors](#contributors)
+- [Forking & Maintaining Your Own Copy](#forking--maintaining-your-own-copy)
 - [Additional Information](#additional-information)
 
 ---
@@ -57,6 +62,56 @@ Now open your eyes. **Welcome to Pokémon Pure Hackmons: No Nerfs**, the format 
 
 ---
 
+## 📂 Repository Structure
+
+```
+PureHackmonsNoNerfs/
+├── pokemon-showdown/              # Full upstream Pokémon Showdown server (subtree)
+│   ├── config/
+│   │   └── formats.ts             # Custom PHNN format definitions (our override)
+│   ├── data/
+│   │   └── mods/
+│   │       └── phnn/              # The Pure Hackmons No Nerfs mod
+│   │           ├── abilities.ts
+│   │           ├── conditions.ts
+│   │           ├── formats-data.ts
+│   │           ├── items.ts
+│   │           ├── moves.ts
+│   │           ├── pokedex.ts
+│   │           ├── scripts.ts
+│   │           └── typechart.ts
+│   ├── server/
+│   ├── sim/
+│   └── ...                        # All other upstream showdown files
+├── pokemon-showdown-client/       # Backup clone of smogon/pokemon-showdown-client
+├── Pokemon-Showdown-Dex/          # Backup clone of Zarel/Pokemon-Showdown-Dex
+├── leftovers-again/               # AI bot framework (modified fork of dramamine/leftovers-again)
+│   ├── src/
+│   │   ├── bot.js                 # Bot logic & team definitions
+│   │   └── app.js                 # Bot entry point
+│   └── package.json
+├── venv/                          # Python virtual environment for leftovers-again
+├── leftovers_npm_start.sh         # Linux desktop shortcut: start the bot
+├── showdown-cloudflare.sh         # Linux desktop shortcut: start Cloudflare tunnel
+├── type_node_pokemon-showdown.sh  # Linux desktop shortcut: start the showdown server
+└── README.md
+```
+
+This repo is a **quad-fork** — it bundles four upstream repositories into a single project so everything needed for Pure Hackmons No Nerfs lives in one place:
+
+| Directory | Upstream Source | How It's Tracked | Role |
+|---|---|---|---|
+| `pokemon-showdown/` | [smogon/pokemon-showdown](https://github.com/smogon/pokemon-showdown) | **git subtree** | The game server. Our PHNN mod (`data/mods/phnn/`) and custom `config/formats.ts` are applied on top. |
+| `leftovers-again/` | [dramamine/leftovers-again](https://github.com/dramamine/leftovers-again) | **git subtree** (modified fork) | AI bot framework, updated to support modern Showdown and pre-loaded with PHNN teams. |
+| `pokemon-showdown-client/` | [smogon/pokemon-showdown-client](https://github.com/smogon/pokemon-showdown-client) | **git submodule** | Backup of the official Showdown web client. Not required for PHNN, but included as reference for potential client-side UI modifications. |
+| `Pokemon-Showdown-Dex/` | [Zarel/Pokemon-Showdown-Dex](https://github.com/Zarel/Pokemon-Showdown-Dex) | **git submodule** | Backup of the official Showdown Dex site. Not required for PHNN, but included as reference for dex data lookups or debugging. |
+
+All four upstream repos can be independently updated. If you fork or clone this repo, see [**MAINTENANCE.md**](MAINTENANCE.md) for instructions on how to pull upstream updates, set up the required git remotes, and resolve merge conflicts.
+
+> **Note for forkers:** Git remotes are local config and don't travel with the repo. After a fresh clone/fork, you'll need to add the upstream remotes manually — `MAINTENANCE.md` has the exact commands.
+
+---
+
 ## 🚀 Installation & Setup
 
 ### Prerequisites
@@ -65,92 +120,165 @@ Before you begin, ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (v18.0.0 or higher)
 - [Git](https://git-scm.com/)
 - A text editor (VS Code, Sublime Text, etc.)
+- [Python 3](https://www.python.org/) (only if you want to use the leftovers-again AI bot)
 
-### Local Installation
+### Quick Start
+
+```bash
+# 1. Clone this repository
+git clone https://github.com/isleep2late/PureHackmonsNoNerfs.git
+cd PureHackmonsNoNerfs
+
+# 2. Install Pokémon Showdown dependencies
+cd pokemon-showdown
+npm install
+
+# 3. Start the server
+node pokemon-showdown start
+
+# 4. Open http://localhost:8000 in your browser and play!
+```
+
+That's it! The PHNN mod and custom formats are already in place. Select **[Gen 9] Pure Hackmons No Nerfs** (or any other Hackmons/Wondrous Hackmons format) from the format picker and start battling.
+
+---
+
+### Detailed Setup
 
 #### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/pure-hackmons-no-nerfs.git
-cd pure-hackmons-no-nerfs
+git clone https://github.com/isleep2late/PureHackmonsNoNerfs.git
+cd PureHackmonsNoNerfs
 ```
 
-#### Step 2: Set Up Pokémon Showdown
-
-Clone the Pokémon Showdown server:
+#### Step 2: Install Pokémon Showdown Dependencies
 
 ```bash
-git clone https://github.com/smogon/pokemon-showdown.git
 cd pokemon-showdown
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
 
-#### Step 3: Install the Pure Hackmons No Nerfs Mod
+This installs all the Node.js packages that Showdown needs to run.
 
-Copy the phnn folder from this repository into the /data/mods folder of the showdown local repo.
+#### Step 3: Start the Server
 
-Next, replace the format.ts file in the parent directory of this repo with the format.ts file in showdown's config folder.
-
-If you want an AI bot to play against solo, feel free to keep the leftovers-again folder, which is a modified fork of https://github.com/dramamine/leftovers-again (6 years old).
-
-#### Step 4: Configure the Format
-
-Change the name of your leftovers-again bot by editing the <INSERT_YOUR_NICKNAME_HERE> in /src/bot.js
-
-You can edit your `config/formats.ts` file to include the additional "No Nerfs" formats:
-
-```typescript
-{
-    section: "No Nerfs Formats",
-},
-{
-    name: "[Gen 9] Pure Hackmons No Nerfs",
-    desc: "The ultimate Pokemon experience where every move is legal, every ability is legal, and every Pokemon can be played at their peak from their strongest generation.",
-    mod: 'phnn',
-    ruleset: ['HP Percentage Mod', 'Cancel Mod', 'Team Preview', 'Overflow Stat Mod'],
-    banlist: [],
-    unbanlist: ['Past', 'Future', 'Unobtainable'],
-    onValidateSet(set, format, setHas, teamHas) {
-        return [];
-    },
-    onValidateTeam(team, format) {
-        return [];
-    },
-    onBegin() {
-        for (const side of this.sides) {
-            side.canMegaEvo = true;
-            side.canUltraBurst = true; 
-            side.canDynamax = true;
-            side.canZMove = true;
-            side.canTerastallize = true;
-        }
-    },
-}
-```
-
-Additionally, for leftovers-again, bot teams can be modified in /src/bot.js
-
-#### Step 5: Start the Server
-
-From your `pokemon-showdown` directory:
+From the `pokemon-showdown/` directory:
 
 ```bash
 node pokemon-showdown start
 ```
 
-Your local server should now be running at `http://localhost:8000`!
+Your local server should now be running at `http://localhost:8000`.
 
-#### Step 6: Connect to Your Server
+#### Step 4: Connect and Play
 
-1. Open your web browser
-2. Go to `http://localhost:8000`
-3. Click on "Choose a format" and select **[Gen 9] Pure Hackmons No Nerfs**
-4. Start battling with your restored Pokémon!
+1. Open your web browser and go to `http://localhost:8000`
+2. Click on **"Choose a format"**
+3. Look under the **"Hackmons Formats"** section
+4. Select **[Gen 9] Pure Hackmons No Nerfs** (or any other available PHNN format)
+5. Build a team or import one, and start battling!
+
+> **Tip:** In Pure Hackmons No Nerfs, every Pokémon can have 252 EVs in every stat, any move, and any ability. Go wild!
+
+---
+
+### Leftovers-Again Bot Setup (Optional)
+
+Want an AI opponent to play against locally? This repo includes a modified fork of [leftovers-again](https://github.com/dramamine/leftovers-again), an AI bot framework for Pokémon Showdown. It comes pre-configured with teams for PHNN and many other formats.
+
+#### Step 1: Install Bot Dependencies
+
+```bash
+cd leftovers-again
+npm install
+```
+
+> **Note:** The leftovers-again package requires Node.js. If `npm install` reports vulnerabilities, that's normal for this older package - it still works fine for local use.
+
+#### Step 2: Configure Your Bot's Nickname
+
+Open `leftovers-again/src/bot.js` and find this line near the top:
+
+```javascript
+nickname: '<INSERT_YOUR_NICKNAME_HERE>',
+```
+
+Replace `<INSERT_YOUR_NICKNAME_HERE>` with whatever name you want your bot to have (e.g., `'PHNNBot'`).
+
+#### Step 3: Start the Showdown Server (if not already running)
+
+In one terminal window:
+
+```bash
+cd pokemon-showdown
+node pokemon-showdown start
+```
+
+#### Step 4: Start the Bot
+
+In a **separate** terminal window:
+
+```bash
+cd leftovers-again
+npm start -- --bot=src/bot.js
+```
+
+The bot will connect to your local Showdown server and wait for challenges. You can now go to `http://localhost:8000`, log in with any username, and challenge the bot.
+
+#### Customizing Bot Teams
+
+The bot includes pre-built teams for many formats. You can view and edit them in `leftovers-again/src/bot.js`. Teams are organized by format:
+
+- `gen9purehackmonsnonerfs` - 10 PHNN teams (the main ones!)
+- `gen9ou`, `gen9ubers`, `gen8ou`, `gen7ou`, `gen6ou`, `gen5ou`, `gen4ou`, `gen3ou`, `gen2ou`, `gen1ou` - Standard format teams
+- `ALL` - Fallback team used for any unrecognized format
+
+Teams use the standard Smogon/Showdown import format, so you can copy teams directly from the [Pokémon Showdown Teambuilder](https://play.pokemonshowdown.com/teambuilder) or [Smogon](https://www.smogon.com/).
+
+#### Bot vs Bot Battles
+
+You can pit two bots against each other:
+
+```bash
+cd leftovers-again
+npm start -- --bot=src/bot.js --opponent=randumb
+```
+
+Built-in opponent bots:
+- `randumb` - Picks random moves (good for basic testing)
+- `stabby` - Picks the highest-damage move (more challenging)
+
+#### Using the Python Virtual Environment
+
+If you need the Python virtual environment (e.g., for additional scripting):
+
+```bash
+source venv/leftovers-again/bin/activate
+```
+
+---
+
+### Keeping Up with Upstream Showdown
+
+Since the `pokemon-showdown/` directory is managed as a git subtree, you can pull the latest changes from the official Pokémon Showdown repository at any time:
+
+```bash
+git subtree pull --prefix=pokemon-showdown https://github.com/smogon/pokemon-showdown.git master --squash
+```
+
+This will merge upstream changes into your local `pokemon-showdown/` directory while preserving your custom files:
+- `pokemon-showdown/config/formats.ts` (PHNN format definitions)
+- `pokemon-showdown/data/mods/phnn/` (the PHNN mod itself)
+
+If upstream changes touch the same files as your customizations, you'll get a merge conflict which you can resolve manually (your customizations should take priority).
+
+After pulling upstream updates, remember to rebuild:
+
+```bash
+cd pokemon-showdown
+npm install  # in case dependencies changed
+```
 
 ---
 
@@ -158,13 +286,19 @@ Your local server should now be running at `http://localhost:8000`!
 
 Want to play with friends? Make your local server accessible over the internet using Cloudflare Tunnels!
 
-#### Step 1: Create a Cloudflare Account
+#### Quick Tunnel (Easiest - No Account Needed)
 
-1. Go to [cloudflare.com](https://www.cloudflare.com/)
-2. Sign up for a free account
-3. Verify your email address
+For quick testing, you can skip account setup and just run:
 
-#### Step 2: Install Cloudflared
+```bash
+cloudflared tunnel --url http://localhost:8000
+```
+
+This gives you a temporary `*.trycloudflare.com` URL. Share it with friends to play together. The URL changes every time you restart the tunnel.
+
+#### Full Tunnel Setup (Persistent URL)
+
+##### Step 1: Install Cloudflared
 
 **Windows:**
 1. Download cloudflared from the [Cloudflare releases page](https://github.com/cloudflare/cloudflared/releases)
@@ -182,25 +316,22 @@ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudfla
 sudo dpkg -i cloudflared-linux-amd64.deb
 ```
 
-#### Step 3: Authenticate Cloudflared
+##### Step 2: Create a Cloudflare Account & Authenticate
+
+1. Go to [cloudflare.com](https://www.cloudflare.com/) and sign up for a free account
+2. Run `cloudflared tunnel login` - this opens a browser window to authenticate
+
+##### Step 3: Create and Configure a Tunnel
 
 ```bash
-cloudflared tunnel login
-```
-
-This will open a browser window. Select the domain you want to use (or use Cloudflare's free subdomain).
-
-#### Step 4: Create a Tunnel
-
-```bash
+# Create the tunnel (note the tunnel ID it gives you)
 cloudflared tunnel create pokemon-showdown
+
+# Route DNS to your tunnel
+cloudflared tunnel route dns pokemon-showdown your-domain.com
 ```
 
-This creates a tunnel and generates a tunnel ID. Take note of this ID.
-
-#### Step 5: Configure the Tunnel
-
-Create a configuration file at `~/.cloudflared/config.yml` (Windows: `%USERPROFILE%\.cloudflared\config.yml`):
+Create a config file at `~/.cloudflared/config.yml`:
 
 ```yaml
 tunnel: YOUR-TUNNEL-ID
@@ -212,61 +343,39 @@ ingress:
   - service: http_status:404
 ```
 
-Replace:
-- `YOUR-TUNNEL-ID` with your actual tunnel ID
-- `/path/to/.cloudflared/YOUR-TUNNEL-ID.json` with the actual path to your credentials file
-- `your-domain.com` with your domain (or use a `*.trycloudflare.com` subdomain for testing)
-
-#### Step 6: Route the Tunnel
-
-Create a DNS record pointing to your tunnel:
-
-```bash
-cloudflared tunnel route dns pokemon-showdown your-domain.com
-```
-
-Or use a quick tunnel for testing (no domain required):
-
-```bash
-cloudflared tunnel --url http://localhost:8000
-```
-
-This will give you a temporary `*.trycloudflare.com` URL.
-
-#### Step 7: Start the Tunnel
+##### Step 4: Start the Tunnel
 
 ```bash
 cloudflared tunnel run pokemon-showdown
 ```
 
-Or for quick testing:
-
-```bash
-cloudflared tunnel --url http://localhost:8000
-```
-
-Your Pokémon Showdown server is now publicly accessible! Share your URL with friends to battle together.
+Your Pokémon Showdown server is now publicly accessible!
 
 #### Keeping the Tunnel Running
 
 **On Windows (using NSSM):**
-1. Download [NSSM](https://nssm.cc/download)
-2. Install cloudflared as a service:
-   ```bash
-   nssm install CloudflaredTunnel "C:\path\to\cloudflared.exe" tunnel run pokemon-showdown
-   nssm start CloudflaredTunnel
-   ```
+```bash
+nssm install CloudflaredTunnel "C:\path\to\cloudflared.exe" tunnel run pokemon-showdown
+nssm start CloudflaredTunnel
+```
 
 **On Linux/macOS:**
 Use systemd or create a startup script to run cloudflared on boot.
 
-#### Desktop Shortcuts
+#### Linux Desktop Shortcuts
 
-The .sh files in the root of this repo are desktop icons I have on my Linux machine.
+The `.sh` files in the root of this repo are convenience scripts for Linux desktop use:
 
-(You will need to literally type "node pokemon-showdown" to start the server. don't ask)
+| Script | Purpose |
+|---|---|
+| `type_node_pokemon-showdown.sh` | Opens a terminal in the `pokemon-showdown/` directory to start the server |
+| `showdown-cloudflare.sh` | Opens a terminal running the Cloudflare tunnel |
+| `leftovers_npm_start.sh` | Activates the Python venv and starts the leftovers-again bot |
 
-Don't forget to chmod these shortcuts and also remember to replace <YOUR_DIRECTORY> in them.
+Before using these scripts:
+1. Replace `<YOUR_DIRECTORY>` in each script with the actual path to this repository
+2. Make them executable: `chmod +x *.sh`
+3. Start the server with: `node pokemon-showdown` from within the `pokemon-showdown/` directory
 
 ---
 
@@ -856,6 +965,32 @@ It might be inconsistent or arbitrary for us to only serve Will-O-Wisp, but ulti
 The three Galar starter G-Max moves (Drum Solo, Fireball, and Hydrosnipe) have been implemented with 160 BP and ability-ignoring properties. Other G-Max moves are still under exploration and may be added in future updates.
 
 Another comment about design philosophy: We are not against the idea of implementing Glitches. There are several Glitchmons such as MissingNo. or glitch moves or items that we could definitely consider. Stat Overflow is an unintended glitch that was never meant to happen, but glitches are fair game, though they are still relegated to Theorymon-level PHNN due to practicality.
+
+---
+
+## 🔧 Forking & Maintaining Your Own Copy
+
+If you fork this repo, you're inheriting a **quad-fork** — four upstream repositories bundled together. To keep your fork up to date and understand how everything fits together, **please read [`MAINTENANCE.md`](MAINTENANCE.md)**. It covers:
+
+- How each of the four upstream repos is tracked (subtree vs submodule)
+- Exact commands to pull the latest updates from each upstream
+- How to set up the required git remotes after a fresh clone (they don't travel with the repo)
+- How to resolve merge conflicts when upstream Showdown changes touch our customizations
+- A full "update everything at once" reference script
+- Troubleshooting common issues
+
+**After cloning/forking, run these to set up upstream remotes:**
+
+```bash
+git remote add upstream-showdown https://github.com/smogon/pokemon-showdown.git
+git remote add upstream-leftovers https://github.com/dramamine/leftovers-again.git
+```
+
+**To initialize the backup submodules (client & dex):**
+
+```bash
+git submodule update --init --recursive
+```
 
 ---
 
