@@ -91,9 +91,9 @@ PureHackmonsNoNerfs/
 │   │   └── app.js                 # Bot entry point
 │   └── package.json
 ├── venv/                          # Python virtual environment for leftovers-again
-├── leftovers_npm_start.sh         # Linux desktop shortcut: start the bot
-├── showdown-cloudflare.sh         # Linux desktop shortcut: start Cloudflare tunnel
-├── type_node_pokemon-showdown.sh  # Linux desktop shortcut: start the showdown server
+├── leftovers_npm_start.*          # Start the bot (.sh / .bat / .command)
+├── showdown-cloudflare.*          # Start Cloudflare tunnel (.sh / .bat / .command)
+├── type_node_pokemon-showdown.*   # Start the showdown server (.sh / .bat / .command)
 └── README.md
 ```
 
@@ -395,20 +395,39 @@ nssm start CloudflaredTunnel
 **On Linux/macOS:**
 Use systemd or create a startup script to run cloudflared on boot.
 
-#### Linux Desktop Shortcuts
+#### Convenience Scripts (All Platforms)
 
-The `.sh` files in the root of this repo are convenience scripts for Linux desktop use:
+This repo includes ready-to-use launcher scripts for all three major operating systems. All scripts read their configuration from `leftovers-again/.env` — you only need to set up the `.env` file once (see [Step 2](#step-2-create-your-env-configuration-file) above).
 
-| Script | Purpose |
-|---|---|
-| `type_node_pokemon-showdown.sh` | Opens a terminal in the `pokemon-showdown/` directory to start the server |
-| `showdown-cloudflare.sh` | Opens a terminal running the Cloudflare tunnel |
-| `leftovers_npm_start.sh` | Activates the Python venv and starts the leftovers-again bot |
+| Purpose | Linux (.sh) | Windows (.bat) | macOS (.command) |
+|---|---|---|---|
+| Start the Showdown server | `type_node_pokemon-showdown.sh` | `type_node_pokemon-showdown.bat` | `type_node_pokemon-showdown.command` |
+| Start Cloudflare tunnel | `showdown-cloudflare.sh` | `showdown-cloudflare.bat` | `showdown-cloudflare.command` |
+| Start the leftovers-again bot | `leftovers_npm_start.sh` | `leftovers_npm_start.bat` | `leftovers_npm_start.command` |
 
-Before using these scripts:
-1. Create your `leftovers-again/.env` file (see [Step 2](#step-2-create-your-env-configuration-file) above) — the scripts read `PROJECT_DIR` and other settings from it
-2. Make them executable: `chmod +x *.sh`
-3. Start the server with: `node pokemon-showdown` from within the `pokemon-showdown/` directory
+##### Setup by OS
+
+**Linux:**
+```bash
+# Make scripts executable (one-time)
+chmod +x *.sh
+
+# Double-click or run from terminal
+./type_node_pokemon-showdown.sh
+```
+You can also create desktop shortcuts (`.desktop` files) that point to these scripts for one-click launching.
+
+**Windows:**
+Simply double-click any `.bat` file to run it. You can also create desktop shortcuts:
+1. Right-click the `.bat` file → **Send to** → **Desktop (create shortcut)**
+2. Optionally rename the shortcut and change its icon
+
+**macOS:**
+```bash
+# Make scripts executable (one-time)
+chmod +x *.command
+```
+Double-click any `.command` file to open it in Terminal. macOS may ask you to allow it the first time — go to **System Settings → Privacy & Security** and click **Open Anyway**.
 
 ---
 

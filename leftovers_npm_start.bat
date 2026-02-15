@@ -1,0 +1,39 @@
+@echo off
+setlocal enabledelayedexpansion
+REM Start the leftovers-again bot (Windows)
+
+REM Load environment variables from .env file
+if not exist "%~dp0leftovers-again\.env" (
+    echo Error: leftovers-again\.env not found.
+    echo Copy leftovers-again\.env.example to leftovers-again\.env and fill in your values.
+    pause
+    exit /b 1
+)
+
+for /f "usebackq tokens=1,* delims==" %%a in ("%~dp0leftovers-again\.env") do (
+    set "line=%%a"
+    if not "!line:~0,1!"=="#" if not "%%a"=="" set "%%a=%%b"
+)
+
+echo ==========================================
+echo Installing dependencies...
+echo ==========================================
+echo.
+
+cd /d "!PROJECT_DIR!\leftovers-again"
+call npm install
+
+echo.
+echo ==========================================
+echo Starting leftovers-again bot...
+echo ==========================================
+echo.
+
+set "BOT_NICKNAME=!BOT_NICKNAME!"
+call npm start -- --bot=src/bot.js
+
+echo.
+echo ==========================================
+echo Bot process ended. Press any key to close.
+echo ==========================================
+pause
