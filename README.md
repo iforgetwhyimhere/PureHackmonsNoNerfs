@@ -65,7 +65,7 @@ Now open your eyes. **Welcome to Pokémon Pure Hackmons: No Nerfs**, the format 
 
 ```
 PureHackmonsNoNerfs/
-├── pokemon-showdown/              # Full upstream Pokémon Showdown server
+├── pokemon-showdown/              # Full upstream Pokémon Showdown server (subtree)
 │   ├── config/
 │   │   └── formats.ts             # Custom PHNN format definitions (our override)
 │   ├── data/
@@ -82,6 +82,8 @@ PureHackmonsNoNerfs/
 │   ├── server/
 │   ├── sim/
 │   └── ...                        # All other upstream showdown files
+├── pokemon-showdown-client/       # Backup clone of smogon/pokemon-showdown-client
+├── Pokemon-Showdown-Dex/          # Backup clone of Zarel/Pokemon-Showdown-Dex
 ├── leftovers-again/               # AI bot framework (modified fork of dramamine/leftovers-again)
 │   ├── src/
 │   │   ├── bot.js                 # Bot logic & team definitions
@@ -95,6 +97,8 @@ PureHackmonsNoNerfs/
 ```
 
 The `pokemon-showdown/` directory is a [git subtree](https://www.atlassian.com/git/tutorials/git-subtree) of the official [smogon/pokemon-showdown](https://github.com/smogon/pokemon-showdown) repository. This means the full showdown source code lives directly in this repo, with our PHNN customizations applied on top. No separate cloning required.
+
+The `pokemon-showdown-client/` and `Pokemon-Showdown-Dex/` directories are backup clones of the official [Pokémon Showdown Client](https://github.com/smogon/pokemon-showdown-client) and [Pokémon Showdown Dex](https://github.com/Zarel/Pokemon-Showdown-Dex) repositories, respectively. These are **not required** for running PHNN, but are included as reference material in case they are useful for future development (e.g., client-side UI modifications, dex data lookups, or debugging).
 
 ---
 
