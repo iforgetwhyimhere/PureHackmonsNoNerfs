@@ -90,7 +90,6 @@ PureHackmonsNoNerfs/
 │   │   ├── bot.js                 # Bot logic & team definitions
 │   │   └── app.js                 # Bot entry point
 │   └── package.json
-├── venv/                          # Python virtual environment for leftovers-again
 ├── leftovers_npm_start.*          # Start the bot (.sh / .bat / .command)
 ├── showdown-cloudflare.*          # Start Cloudflare tunnel (.sh / .bat / .command)
 ├── type_node_pokemon-showdown.*   # Start the showdown server (.sh / .bat / .command)
@@ -187,21 +186,24 @@ Your local server should now be running at `http://localhost:8000`.
 
 Want an AI opponent to play against locally? This repo includes a modified fork of [leftovers-again](https://github.com/dramamine/leftovers-again), an AI bot framework for Pokémon Showdown. It comes pre-configured with teams for PHNN and many other formats.
 
-#### Step 1: Install Bot Dependencies
+**Additional prerequisites for the bot:**
+- [Python 3](https://www.python.org/) (to create the virtual environment)
+- `pip` (comes with Python on most systems)
 
-```bash
-cd leftovers-again
-npm install
-```
+> The bot launcher scripts automatically create an isolated Python + Node.js v16 virtual environment (via [nodeenv](https://github.com/ekalinin/nodeenv)) in `venv/leftovers-again/` on first run. This keeps the bot's Node version separate from your system Node. The `venv/` folder is gitignored and is not included in the repository — it is generated locally.
 
-> **Note:** The leftovers-again package requires Node.js. If `npm install` reports vulnerabilities, that's normal for this older package - it still works fine for local use.
-
-#### Step 2: Create Your `.env` Configuration File
+#### Step 1: Create Your `.env` Configuration File
 
 Copy the example environment file and fill in your own values:
 
+**Linux / macOS:**
 ```bash
 cp leftovers-again/.env.example leftovers-again/.env
+```
+
+**Windows (Command Prompt):**
+```cmd
+copy leftovers-again\.env.example leftovers-again\.env
 ```
 
 Then open `leftovers-again/.env` in a text editor and update the values for your system:
@@ -223,6 +225,8 @@ SHOWDOWN_SERVER=localhost
 SHOWDOWN_PORT=8000
 ```
 
+> **Windows users:** Use backslashes for `PROJECT_DIR`, e.g. `PROJECT_DIR=C:\Users\YourName\PureHackmonsNoNerfs`
+
 | Variable | Required | Description |
 |---|---|---|
 | `PROJECT_DIR` | **Yes** | Absolute path to your local `PureHackmonsNoNerfs` directory |
@@ -233,7 +237,7 @@ SHOWDOWN_PORT=8000
 
 > **Important:** The `.env` file is gitignored and will NOT be committed to the repository, so your personal configuration stays local. You must create it on every machine you clone to.
 
-#### Step 3: Start the Showdown Server (if not already running)
+#### Step 2: Start the Showdown Server (if not already running)
 
 In one terminal window:
 
@@ -242,22 +246,21 @@ cd pokemon-showdown
 node pokemon-showdown start
 ```
 
-#### Step 4: Start the Bot
+#### Step 3: Start the Bot
 
-In a **separate** terminal window:
+Use the launcher script for your OS — it will automatically create the virtual environment on first run, install all dependencies, and start the bot:
 
-```bash
-cd leftovers-again
-npm start -- --bot=src/bot.js
-```
+| OS | Command |
+|---|---|
+| **Linux** | `./leftovers_npm_start.sh` (or double-click) |
+| **Windows** | Double-click `leftovers_npm_start.bat` |
+| **macOS** | Double-click `leftovers_npm_start.command` |
 
-Or, on Linux, use the convenience script which reads from your `.env` automatically:
-
-```bash
-./leftovers_npm_start.sh
-```
+On first launch you'll see it creating the venv and installing Node.js v16 — this only happens once. Subsequent launches will reuse the existing venv and start up quickly.
 
 The bot will connect to your local Showdown server and wait for challenges. You can now go to `http://localhost:8000`, log in with any username, and challenge the bot.
+
+> **Note:** If `npm install` reports vulnerabilities, that's normal for this older package — it still works fine for local use.
 
 #### Customizing Bot Teams
 
@@ -281,14 +284,6 @@ npm start -- --bot=src/bot.js --opponent=randumb
 Built-in opponent bots:
 - `randumb` - Picks random moves (good for basic testing)
 - `stabby` - Picks the highest-damage move (more challenging)
-
-#### Using the Python Virtual Environment
-
-If you need the Python virtual environment (e.g., for additional scripting):
-
-```bash
-source venv/leftovers-again/bin/activate
-```
 
 ---
 
