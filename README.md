@@ -196,15 +196,42 @@ npm install
 
 > **Note:** The leftovers-again package requires Node.js. If `npm install` reports vulnerabilities, that's normal for this older package - it still works fine for local use.
 
-#### Step 2: Configure Your Bot's Nickname
+#### Step 2: Create Your `.env` Configuration File
 
-Open `leftovers-again/src/bot.js` and find this line near the top:
+Copy the example environment file and fill in your own values:
 
-```javascript
-nickname: '<INSERT_YOUR_NICKNAME_HERE>',
+```bash
+cp leftovers-again/.env.example leftovers-again/.env
 ```
 
-Replace `<INSERT_YOUR_NICKNAME_HERE>` with whatever name you want your bot to have (e.g., `'PHNNBot'`).
+Then open `leftovers-again/.env` in a text editor and update the values for your system:
+
+```bash
+# Absolute path to your PureHackmonsNoNerfs directory
+PROJECT_DIR=/home/your-username/path/to/PureHackmonsNoNerfs
+
+# Bot nickname shown in battle (default: MultiBot)
+BOT_NICKNAME=MultiBot
+
+# Showdown account password (leave empty for guest/unregistered nicknames)
+BOT_PASSWORD=
+
+# Showdown server host (default: localhost)
+SHOWDOWN_SERVER=localhost
+
+# Showdown server port (default: 8000)
+SHOWDOWN_PORT=8000
+```
+
+| Variable | Required | Description |
+|---|---|---|
+| `PROJECT_DIR` | **Yes** | Absolute path to your local `PureHackmonsNoNerfs` directory |
+| `BOT_NICKNAME` | No | The name your bot shows in battle (defaults to `MultiBot`) |
+| `BOT_PASSWORD` | No | Password for a registered Showdown account (leave blank for guest) |
+| `SHOWDOWN_SERVER` | No | Showdown server hostname (defaults to `localhost`) |
+| `SHOWDOWN_PORT` | No | Showdown server port (defaults to `8000`) |
+
+> **Important:** The `.env` file is gitignored and will NOT be committed to the repository, so your personal configuration stays local. You must create it on every machine you clone to.
 
 #### Step 3: Start the Showdown Server (if not already running)
 
@@ -222,6 +249,12 @@ In a **separate** terminal window:
 ```bash
 cd leftovers-again
 npm start -- --bot=src/bot.js
+```
+
+Or, on Linux, use the convenience script which reads from your `.env` automatically:
+
+```bash
+./leftovers_npm_start.sh
 ```
 
 The bot will connect to your local Showdown server and wait for challenges. You can now go to `http://localhost:8000`, log in with any username, and challenge the bot.
@@ -373,7 +406,7 @@ The `.sh` files in the root of this repo are convenience scripts for Linux deskt
 | `leftovers_npm_start.sh` | Activates the Python venv and starts the leftovers-again bot |
 
 Before using these scripts:
-1. Replace `<YOUR_DIRECTORY>` in each script with the actual path to this repository
+1. Create your `leftovers-again/.env` file (see [Step 2](#step-2-create-your-env-configuration-file) above) — the scripts read `PROJECT_DIR` and other settings from it
 2. Make them executable: `chmod +x *.sh`
 3. Start the server with: `node pokemon-showdown` from within the `pokemon-showdown/` directory
 
