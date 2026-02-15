@@ -6,7 +6,7 @@ const defaults = require('./defaults');
 const BotManager = require('./botmanager');
 const BattleManager = require('./battlemanager');
 const Spawner = require('./spawner');
-const Interactive = require('./interfaces/cli');
+let Interactive;
 const Challenger = require('./model/challenges');
 const Lobby = require('./model/lobby');
 const Log = require('./log');
@@ -139,6 +139,7 @@ const start = (metadata, Bot) => {
 
   let interactive; // eslint-disable-line
   if (args.interactive || args.i) {
+    Interactive = require('./interfaces/cli');
     interactive = new Interactive({
       challenger,
       lobby
