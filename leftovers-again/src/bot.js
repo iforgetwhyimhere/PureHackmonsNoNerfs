@@ -10,7 +10,7 @@ class MultiFormatBot {
       accepts: 'ALL', // Accept all formats
       format: null,
       version: '2.0',
-      nickname: '<INSERT_YOUR_NICKNAME_HERE>',
+      nickname: 'MultiBot',
     };
     
     // Store complete 6-Pokemon teams organized by format
@@ -20,7 +20,7 @@ class MultiFormatBot {
       // ============================================
       'gen9purehackmonsnonerfs': [
         // Team 1: Ultra Offensive Spam
-        `Mewtwo @ Life Orb
+        `Xerneas @ Life Orb
 Ability: Huge Power
 EVs: 252 HP / 252 Atk / 252 Def / 252 SpA / 252 SpD / 252 Spe
 Hasty Nature
@@ -28,8 +28,7 @@ Hasty Nature
 - V-create
 - Bolt Strike
 - Psystrike
-
-Arceus @ Leftovers
+Arceus-Fairy @ Leftovers
 Ability: Fur Coat
 EVs: 252 HP / 252 Atk / 252 Def / 252 SpA / 252 SpD / 252 Spe
 Adamant Nature
@@ -1762,54 +1761,49 @@ Adamant Nature
 
       // Add "All" category for formats that accept all
       'ALL': [
-        `Arceus @ Life Orb
-Ability: Multitype
+        `Arceus-Fairy @ Life Orb
+Ability: Parental Bond
 EVs: 252 HP / 252 Atk / 252 SpA / 252 Spe
-Adamant Nature
-- Extreme Speed
+Naive Nature
+- Magical Torque
 - Earthquake
-- Judgment
+- Extremespeed
 - Recover
-
-Mewtwo @ Leftovers
-Ability: Pressure
-EVs: 252 HP / 252 SpA / 252 Spe
+Xerneas @ Leftovers
+Ability: Wonder Guard
+EVs: 252 HP / 252 Def / 252 SpA / 252 SpD / 252 Spe
 Modest Nature
 - Psystrike
 - Ice Beam
 - Aura Sphere
 - Recover
-
-Rayquaza @ Choice Band
-Ability: Air Lock
-EVs: 252 Atk / 4 SpD / 252 Spe
+Rayquaza @ Berserk Gene
+Ability: Intrepid Sword
+EVs: 252 HP / 252 Atk / 252 Def / 252 SpA / 252 SpD / 252 Spe
 Jolly Nature
 - Dragon Ascent
 - V-create
 - Extreme Speed
-- U-turn
-
-Kyogre @ Choice Specs
+- Glaive Rush
+Kyogre-Primal @ Choice Scarf
 Ability: Drizzle
-EVs: 252 SpA / 4 SpD / 252 Spe
+EVs: 252 HP / 252 Atk / 252 Def / 252 SpA / 252 SpD / 252 Spe
 Modest Nature
 - Water Spout
 - Origin Pulse
 - Ice Beam
 - Thunder
-
-Groudon @ Leftovers
-Ability: Drought
-EVs: 252 HP / 252 Atk / 4 SpD
+Groudon-Primal @ Leftovers
+Ability: Huge Power
+EVs: 252 HP / 252 Atk / 252 Def / 252 SpA / 252 SpD / 252 Spe
 Adamant Nature
 - Precipice Blades
-- Stone Edge
-- Fire Punch
-- Stealth Rock
-
-Dialga @ Adamant Orb
-Ability: Pressure
-EVs: 252 HP / 252 SpA / 4 SpD
+- Diamond Storm
+- Sacred Fire
+- Noxious Torque
+Dialga @ Leftovers
+Ability: Parental Bond
+EVs: 252 HP / 252 Atk / 252 Def / 252 SpA / 252 SpD / 252 Spe
 Modest Nature
 - Draco Meteor
 - Flash Cannon
