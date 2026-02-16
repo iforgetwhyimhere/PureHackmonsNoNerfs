@@ -130,6 +130,72 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	},
 },
 {
+	name: "[Gen 1] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen1',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 2] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen2',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 3] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen3',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 4] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen4',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 5] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen5',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 6] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen6',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 7] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen7',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 8] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen8',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 9] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen9',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 7 Let's Go] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen7letsgo',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
+	name: "[Gen 8 BDSP] Pure Hackmons",
+	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	mod: 'gen8bdsp',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+},
+{
 	name: "[Gen 9] Wondrous Hackmons",
 	desc: "A custom Hackmons format with select bans for a balanced experience.",
 	mod: 'gen9',
@@ -1067,12 +1133,6 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Final Gambit', 'Flower Trick', 'Gigaton Hammer', 'No Retreat', 'Rage Fist', 'Revival Blessing', 'Shell Smash', 'Shift Gear', 'Torch Song', 'Triple Arrows', 'V-create',
 			'Victory Dance', 'Water Shuriken', 'Wicked Blow', 'Wicked Torque',
 		],
-	},
-	{
-		name: "[Gen 7] Pure Hackmons",
-		desc: `Anything that can be hacked in-game and is usable in local battles is allowed.`,
-		mod: 'gen7',
-		ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
 	},
 
 	// Challengeable OMs
@@ -2430,13 +2490,6 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		},
 	},
 	{
-		name: "[Gen 9] Pure Hackmons",
-		desc: `Anything directly hackable onto a set (EVs, IVs, forme, ability, item, and move) and is usable in local battles is allowed.`,
-		mod: 'gen9',
-		searchShow: false,
-		ruleset: ['Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Hackmons Forme Legality', 'Species Reveal Clause', 'Endless Battle Clause'],
-	},
-	{
 		name: "[Gen 9] Relay Race",
 		desc: `The effects of the move Baton Pass are triggered upon manually withdrawing a Pok&eacute;mon from battle.`,
 		mod: 'gen9',
@@ -3002,13 +3055,6 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Reshiram', 'Shaymin-Sky', 'Solgaleo', 'Terapagos', 'Urshifu-Single-Strike', 'Zacian', 'Zacian-Crowned', 'Zekrom', 'King\'s Rock', 'Razor Fang', 'Fake Out',
 			'Last Respects', 'Revival Blessing',
 		],
-	},
-	{
-		name: "[Gen 6] Pure Hackmons",
-		desc: `Anything that can be hacked in-game and is usable in local battles is allowed.`,
-		mod: 'gen6',
-		searchShow: false,
-		ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'EV limit = 510'],
 	},
 
 	// Temporary Tour Metas
