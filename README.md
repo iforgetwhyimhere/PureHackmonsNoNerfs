@@ -379,6 +379,21 @@ cloudflared tunnel run pokemon-showdown
 
 Your Pokémon Showdown server is now publicly accessible!
 
+##### Step 5: Configure Pokemon Showdown for Cloudflare Tunnel
+
+**IMPORTANT:** To make Pokemon Showdown work properly with Cloudflare Tunnel, you need to configure it to trust the proxy.
+
+1. Copy `pokemon-showdown/config/config-example.js` to `pokemon-showdown/config/config.js` if you haven't already
+2. The `config-example.js` has been updated to include the necessary proxy configuration by default:
+
+```javascript
+exports.proxyip = ['127.0.0.1', '::1'];
+```
+
+This setting tells Pokemon Showdown to trust requests from localhost (where Cloudflare Tunnel runs) and read the real client IP from the `X-Forwarded-For` header. **Without this setting, you may experience 404 errors and connection issues.**
+
+**Note:** This change has been made to the default config-example.js for the convenience of users running behind Cloudflare Tunnel or other reverse proxies. If you're running the server directly without a proxy, you can set this back to `false` for slightly better security.
+
 #### Keeping the Tunnel Running
 
 **On Windows (using NSSM):**
