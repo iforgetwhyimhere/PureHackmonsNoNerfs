@@ -1,6 +1,12 @@
 @echo off
 setlocal enabledelayedexpansion
-REM Launch Pokemon Showdown Cloudflare tunnel (Windows)
+REM Launch Pokemon Showdown Cloudflare tunnel (Windows) with optimizations
+
+echo ==========================================
+echo   Starting Cloudflare Tunnel
+echo   play.hackmons.com -^> localhost:8000
+echo ==========================================
+echo.
 
 REM Load environment variables from .env file
 if not exist "%~dp0leftovers-again\.env" (
@@ -15,13 +21,62 @@ for /f "usebackq tokens=1,* delims==" %%a in ("%~dp0leftovers-again\.env") do (
     if not "!line:~0,1!"=="#" if not "%%a"=="" set "%%a=%%b"
 )
 
-echo ==========================================
-echo Starting Cloudflare Tunnel...
-echo ==========================================
+REM Check if cloudflared is installed
+where cloudflared >nul 2>nul
+if errorlevel 1 (
+    echo Error: cloudflared is not installed.
+    echo Install it from: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/
+    pause
+    exit /b 1
+)
+
+REM Check if config file exists
+set "CONFIG_FILE=%~dp0cloudflared-config.yml"
+if exist "!CONFIG_FILE!" (
+    echo Using configuration file: cloudflared-config.yml
+    echo   - Optimized timeouts for long-lived connections
+    echo   - QUIC protocol for better performance
+    echo   - Enhanced retry logic
+    echo.
+
+    REM Check for tunnel credentials
+    if exist "%USERPROFILE%\.cloudflared\*.json" (
+        echo Found tunnel credentials - using named tunnel with config
+        set "TUNNEL_CMD=cloudflared tunnel --config !CONFIG_FILE! run"
+    ) else (
+        echo Quick tunnel mode detected (no named tunnel configured)
+        echo For full config support, create a named tunnel
+        echo See: CLOUDFLARE-TROUBLESHOOTING.md
+        echo.
+        set "TUNNEL_CMD=cloudflared tunnel --url http://localhost:8000"
+    )
+) else (
+    echo Warning: cloudflared-config.yml not found
+    echo Using default quick tunnel mode (not recommended for production)
+    echo.
+    set "TUNNEL_CMD=cloudflared tunnel --url http://localhost:8000"
+)
+
+REM Check if Pokemon Showdown is running
+curl -s -o nul -w "%%{http_code}" http://localhost:8000 | findstr /r "^[23][0-9][0-9]$" >nul
+if errorlevel 1 (
+    echo Warning: No server detected at http://localhost:8000
+    echo Make sure Pokemon Showdown is running before starting the tunnel.
+    echo.
+    set /p "confirm=Continue anyway? (y/N): "
+    if /i not "!confirm!"=="y" exit /b 1
+)
+
+echo.
+echo Starting tunnel...
+echo.
+echo Tips for troubleshooting:
+echo   - Check that Pokemon Showdown is running on port 8000
+echo   - See CLOUDFLARE-TROUBLESHOOTING.md for common issues
 echo.
 
 cd /d "!PROJECT_DIR!\pokemon-showdown"
-cloudflared tunnel --url http://localhost:8000
+!TUNNEL_CMD!
 
 echo.
 echo ==========================================
