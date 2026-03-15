@@ -8,17 +8,16 @@ echo   play.hackmons.com -^> localhost:8000
 echo ==========================================
 echo.
 
-REM Load environment variables from .env file
-if not exist "%~dp0leftovers-again\.env" (
-    echo Error: leftovers-again\.env not found.
-    echo Copy leftovers-again\.env.example to leftovers-again\.env and fill in your values.
-    pause
-    exit /b 1
-)
+REM Determine project directory (use .env if available, otherwise use script location)
+set "PROJECT_DIR=%~dp0"
+REM Remove trailing backslash
+if "!PROJECT_DIR:~-1!"=="\" set "PROJECT_DIR=!PROJECT_DIR:~0,-1!"
 
-for /f "usebackq tokens=1,* delims==" %%a in ("%~dp0leftovers-again\.env") do (
-    set "line=%%a"
-    if not "!line:~0,1!"=="#" if not "%%a"=="" set "%%a=%%b"
+if exist "%~dp0leftovers-again\.env" (
+    for /f "usebackq tokens=1,* delims==" %%a in ("%~dp0leftovers-again\.env") do (
+        set "line=%%a"
+        if not "!line:~0,1!"=="#" if not "%%a"=="" set "%%a=%%b"
+    )
 )
 
 REM Check if cloudflared is installed
@@ -63,6 +62,9 @@ if errorlevel 1 (
     echo Warning: No server detected at http://localhost:8000
     echo Make sure Pokemon Showdown is running before starting the tunnel.
     echo.
+    echo IMPORTANT: You MUST start the server first before the tunnel!
+    echo   Run type_node_pokemon-showdown.bat in a separate window first.
+    echo.
     set /p "confirm=Continue anyway? (y/N): "
     if /i not "!confirm!"=="y" exit /b 1
 )
@@ -73,6 +75,7 @@ echo.
 echo Tips for troubleshooting:
 echo   - Check that Pokemon Showdown is running on port 8000
 echo   - See CLOUDFLARE-TROUBLESHOOTING.md for common issues
+echo   - Share the tunnel URL (shown below) with friends to battle!
 echo.
 
 cd /d "!PROJECT_DIR!\pokemon-showdown"
