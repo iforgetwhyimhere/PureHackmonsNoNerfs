@@ -116,7 +116,7 @@ All four upstream repos can be independently updated. If you fork or clone this 
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v18.0.0 or higher)
+- [Node.js](https://nodejs.org/) (v22.0.0 or higher — **required**, the server will not start on older versions)
 - [Git](https://git-scm.com/)
 - A text editor (VS Code, Sublime Text, etc.)
 - [Python 3](https://www.python.org/) (only if you want to use the leftovers-again AI bot)
