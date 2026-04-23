@@ -579,6 +579,128 @@ clangoroussoulblaze: {
 		pp: 5, // Give it reasonable PP
 	},
 
+	// Pokemon Champions buffs (BP)
+	anchorshot: {
+		inherit: true,
+		basePower: 90, // 80 → 90
+	},
+	appleacid: {
+		inherit: true,
+		basePower: 90, // 80 → 90
+	},
+	beakblast: {
+		inherit: true,
+		basePower: 120, // 100 → 120
+	},
+	bonerush: {
+		inherit: true,
+		basePower: 30, // 25 → 30
+	},
+	dragonhammer: {
+		inherit: true,
+		basePower: 100, // 90 → 100
+	},
+	firelash: {
+		inherit: true,
+		basePower: 90, // 80 → 90
+	},
+	firstimpression: {
+		inherit: true,
+		basePower: 100, // 90 → 100 (BP buff only; keep vanilla turn-1 selection rules)
+	},
+	geargrind: {
+		inherit: true,
+		basePower: 60,  // 50 → 60
+		accuracy: 90,   // 85 → 90
+	},
+	gravapple: {
+		inherit: true,
+		basePower: 90, // 80 → 90
+	},
+	hyperdrill: {
+		inherit: true,
+		basePower: 120, // 100 → 120
+	},
+	infernalparade: {
+		inherit: true,
+		basePower: 65, // 60 → 65
+	},
+	mountaingale: {
+		inherit: true,
+		basePower: 120, // 100 → 120
+	},
+	nightdaze: {
+		inherit: true,
+		basePower: 90, // vanilla 85 → 90 (Champions buff)
+	},
+	psyshieldbash: {
+		inherit: true,
+		basePower: 90, // 70 → 90
+	},
+	revelationdance: {
+		inherit: true,
+		basePower: 100, // 90 → 100
+	},
+	snipeshot: {
+		inherit: true,
+		basePower: 85, // 80 → 85
+	},
+	spiritshackle: {
+		inherit: true,
+		basePower: 90, // 80 → 90
+	},
+	tripledive: {
+		inherit: true,
+		basePower: 35, // 30 → 35
+	},
+	tropkick: {
+		inherit: true,
+		basePower: 85, // 70 → 85
+	},
+
+	// Pokemon Champions buffs (accuracy)
+	crabhammer: {
+		inherit: true,
+		accuracy: 95, // 90 → 95
+	},
+	syrupbomb: {
+		inherit: true,
+		accuracy: 90, // 85 → 90
+	},
+
+	// Pokemon Champions buffs (slicing flag → benefits from Sharpness)
+	crushclaw: {
+		inherit: true,
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1 },
+	},
+	dragonclaw: {
+		inherit: true,
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1 },
+	},
+	metalclaw: {
+		inherit: true,
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1 },
+	},
+	shadowclaw: {
+		inherit: true,
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1 },
+	},
+	direclaw: {
+		// Flag-only buff; vanilla 50% status chance preserved
+		inherit: true,
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1 },
+	},
+
+	// Pokemon Champions buffs (misc)
+	toxicthread: {
+		inherit: true,
+		boosts: {
+			spe: -2, // -1 → -2
+		},
+		shortDesc: "100% chance to poison and lower the target's Speed by 2.",
+		desc: "This move does not deal damage. Has a 100% chance to poison the target and lower its Speed stat by 2 stages.",
+	},
+
 	// Let's Go Partner Eevee Moves
 	bouncybubble: {
 		inherit: true,

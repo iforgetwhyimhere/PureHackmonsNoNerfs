@@ -600,6 +600,33 @@ All 19 new Mega Evolutions from the Legends Z-A DLC are now available:
 - **Self-Destruct/Explosion**: Cause opposing defenses to be halved
 - **Hidden Power**: Back to variable BP based on IVs (30-70)
 
+**Pokémon Champions BP buffs (ported in)**
+
+<details>
+<summary><b>View all Champions-derived BP buffs</b></summary>
+
+- **Anchor Shot**: 80 → 90 BP
+- **Apple Acid**: 80 → 90 BP
+- **Beak Blast**: 100 → 120 BP
+- **Bone Rush**: 25 → 30 BP (per hit)
+- **Dragon Hammer**: 90 → 100 BP
+- **Fire Lash**: 80 → 90 BP
+- **First Impression**: 90 → 100 BP (turn-1 selection rules unchanged)
+- **Gear Grind**: 50 → 60 BP (per hit)
+- **Grav Apple**: 80 → 90 BP
+- **Hyper Drill**: 100 → 120 BP
+- **Infernal Parade**: 60 → 65 BP
+- **Mountain Gale**: 100 → 120 BP
+- **Night Daze**: 85 → 90 BP
+- **Psyshield Bash**: 70 → 90 BP
+- **Revelation Dance**: 90 → 100 BP
+- **Snipe Shot**: 80 → 85 BP
+- **Spirit Shackle**: 80 → 90 BP
+- **Triple Dive**: 30 → 35 BP (per hit)
+- **Trop Kick**: 70 → 85 BP
+
+</details>
+
 #### Accuracy Buffs
 
 **Traditional Accuracy Nerfs Reversed**
@@ -613,6 +640,11 @@ All 19 new Mega Evolutions from the Legends Z-A DLC are now available:
 - **Nightmare**: Never misses
 
 > *Note: Legends Z-A introduced 100% accuracy for many moves in its real-time combat system. However, these accuracy buffs have been intentionally **excluded** from this mod (except for Will-O-Wisp) to maintain competitive balance. Thunder, Blizzard, Hurricane, Focus Blast, and other moves retain their standard accuracies.*
+
+**Pokémon Champions accuracy buffs (ported in)**
+- **Crabhammer**: 90 → 95%
+- **Gear Grind**: 85 → 90%
+- **Syrup Bomb**: 85 → 90%
 
 #### PP Restorations
 
@@ -699,6 +731,8 @@ All 19 new Mega Evolutions from the Legends Z-A DLC are now available:
 - **Hyper Beam**: No recharge turn if target is KO'd
 - **Substitute**: Blocks Curse; Giga Drain/Mega Drain/Absorb/Dream Eater misses
 - **Sheer Cold**: Ice-types are no longer immune
+- **Toxic Thread** *(Pokémon Champions port)*: Now lowers target's Speed by 2 stages instead of 1
+- **Crush Claw / Dragon Claw / Metal Claw / Shadow Claw / Dire Claw** *(Pokémon Champions port)*: Gain the `slicing` flag, making them benefit from the Sharpness ability (Dire Claw retains its 50% status chance)
 
 </details>
 
