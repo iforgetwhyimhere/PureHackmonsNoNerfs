@@ -219,7 +219,7 @@ class Challenger {
 
       // only accept battles of the type we're designed for
       if (Challenger.acceptable(format, this.botmanager.accepts)) {
-        if (Challenger.requiresTeam(format)) this.sendTeam(opponent);
+        if (Challenger.requiresTeam(format)) this.sendTeam(opponent, format);
         this.connection.send('|/accept ' + opponent);
         activeMatches.add(opponent);
       }
@@ -238,11 +238,13 @@ class Challenger {
    *
    * @param {String} opponent  The opponent's nickname. This is provided in
    * case you want to customize your team against specific opponents.
+   * @param {String} format  The battle format being played. Used to pick a
+   * team that is legal for this format.
    *
    * @return {Boolean}  True if we did send the message; false otherwise
    */
-  sendTeam(opponent) {
-    const team = this.botmanager.team(opponent);
+  sendTeam(opponent, format) {
+    const team = this.botmanager.team(format, opponent);
     if (team) {
       const utmString = new Team(team).asUtm();
       Log.info('sending team msg...', utmString);
@@ -300,7 +302,7 @@ class Challenger {
   challenge(nick) {
     const format = this.format;
 
-    if (Challenger.requiresTeam(format)) this.sendTeam(nick);
+    if (Challenger.requiresTeam(format)) this.sendTeam(nick, format);
 
     Log.info(`sending challenge... ${nick} ${format}`);
     this.connection.send('|/challenge ' + nick + ', ' + format);

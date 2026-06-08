@@ -34,9 +34,56 @@ export const Scripts: ModdedBattleScriptsData = {
 			const abilityid = this.battle.toID(ability);
 			return this.ability === abilityid;
 		},
+
+		// Gen 8 Dynamax support for PHNN, gated by the transformation priority:
+		//   Ultra Burst / Mega Evolution  >  Terastallization (Tera type set)  >  Dynamax (no Tera type)
+		// A Pokemon may only Dynamax if it cannot Ultra Burst / Mega Evolve and its set does NOT specify
+		// a Tera type. The actual Max-move list is built by the base implementation (called with
+		// skipChecks=true); we only customize the eligibility gate here.
+		getDynamaxRequest(skipChecks?: boolean) {
+			if (!skipChecks) {
+				if (!this.side.canDynamaxNow()) return;
+				// Mega Evolution and Ultra Burst take priority over Dynamax.
+				if (
+					this.species.isMega || this.species.isPrimal || this.species.forme === 'Ultra' ||
+					this.getItem().zMove || this.canMegaEvo || this.canUltraBurst
+				) {
+					return;
+				}
+				// A Pokemon Terastallizes (instead of Dynamaxing) only if its Tera type was set to a type
+				// OTHER than its primary type. The teambuilder defaults an unchosen Tera type to the
+				// species' first type, so "Tera type == primary type" counts as "no Tera type chosen"
+				// and the Pokemon Dynamaxes instead. See canTerastallize for the matching gate.
+				if (this.set.teraType && this.set.teraType !== this.species.types[0]) return;
+				// No Nerfs: the base game's `cannotDynamax` species restriction is intentionally ignored,
+				// so even box legendaries (Zacian, Eternatus, etc.) may Dynamax here.
+			}
+			return Object.getPrototypeOf(this).getDynamaxRequest.call(this, true);
+		},
+	},
+
+	side: {
+		// PHNN enables Dynamax in this Gen 9 mod. Mirror the base check but drop the `gen === 8` guard.
+		// `dynamaxUsed` starts false for phnn (see sim/side.ts) and is set true once a side Dynamaxes,
+		// which preserves the standard "once per battle" rule. In multi battles teammates alternate turns.
+		canDynamaxNow(this: Side) {
+			if (this.battle.gameType === 'multi' && this.battle.turn % 2 !== [1, 1, 0, 0][this.n]) return false;
+			return !this.dynamaxUsed;
+		},
 	},
 
 	actions: {
+		// Terastallization is only offered when Ultra Burst / Mega Evolution are unavailable AND the set's
+		// Tera type was chosen to be something OTHER than the Pokemon's primary type. Because the
+		// teambuilder defaults an unchosen Tera type to the species' first type, "Tera type == primary
+		// type" is treated as "no Tera type chosen", so the Pokemon Dynamaxes instead (see
+		// getDynamaxRequest above). This keeps Tera and Dynamax mutually exclusive per Pokemon.
+		canTerastallize(pokemon: Pokemon) {
+			if (pokemon.getItem().zMove || pokemon.canMegaEvo || pokemon.canUltraBurst) return null;
+			if (!pokemon.set.teraType || pokemon.set.teraType === pokemon.species.types[0]) return null;
+			return pokemon.teraType;
+		},
+
 		// Parental Bond damage modifier (from new file)
 		modifyDamage(
 			baseDamage: number, pokemon: Pokemon, target: Pokemon, move: ActiveMove, suppressMessages = false

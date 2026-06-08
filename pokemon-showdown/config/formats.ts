@@ -161,9 +161,9 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 },
 {
 	name: "[Gen 9] Pure Hackmons",
-	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
+	desc: "Anything directly hackable onto a set (EVs, IVs, forme, ability, item, and move) and is usable in local battles is allowed.",
 	mod: 'gen9',
-	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+	ruleset: ['Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Hackmons Forme Legality', 'Species Reveal Clause', 'Endless Battle Clause'],
 },
 {
 	name: "[Gen 7 Let's Go] Pure Hackmons",

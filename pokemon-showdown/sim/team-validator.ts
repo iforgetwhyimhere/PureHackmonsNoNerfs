@@ -704,7 +704,20 @@ export class TeamValidator {
 				set.hpType = type.name;
 			}
 		}
-		if ((this.gen === 9 && dex.currentMod !== 'champions' && !ruleTable.has('terastalclause')) ||
+		if (dex.currentMod === 'phnn') {
+			// Pure Hackmons No Nerfs: Terastallization is opt-in. A Tera type is only kept if the
+			// player explicitly set one; it is NEVER defaulted to the species' first type. An empty
+			// teraType is the signal that this Pokemon should Dynamax instead of Terastallizing
+			// (see data/mods/phnn/scripts.ts: canTerastallize / getDynamaxRequest).
+			if (set.teraType) {
+				const type = dex.types.get(set.teraType);
+				if (!type.exists || type.isNonstandard) {
+					problems.push(`${name}'s Terastal type (${set.teraType}) is invalid.`);
+				} else {
+					set.teraType = type.name;
+				}
+			}
+		} else if ((this.gen === 9 && dex.currentMod !== 'champions' && !ruleTable.has('terastalclause')) ||
 			ruleTable.has('bonustypemod')) {
 			const type = dex.types.get(set.teraType || species.requiredTeraType || species.types[0]);
 			if (!type.exists || type.isNonstandard) {

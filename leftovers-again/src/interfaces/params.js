@@ -222,7 +222,7 @@ class Challenger {
         // team message is: /utm ('use team')
 
         if (Challenger.requiresTeam(format)) {
-          const team = this.botmanager.team(opponent);
+          const team = this.botmanager.team(format, opponent);
           if (team) {
             const utmString = new Team(team).asUtm();
             Log.info('sending team msg...', utmString);
@@ -295,7 +295,7 @@ class Challenger {
     const format = this.format;
 
     if (Challenger.requiresTeam(format)) {
-      const team = this.botmanager.team(nick);
+      const team = this.botmanager.team(format, nick);
       if (team) {
         const utmString = new Team(team).asUtm();
         Log.info('sending utm...', utmString);

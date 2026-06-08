@@ -15,6 +15,7 @@ type ModdedDex = import('./dex').ModdedDex;
 type Pokemon = import('./pokemon').Pokemon;
 type PRNGSeed = import('./prng').PRNGSeed;
 type Side = import('./side').Side;
+type DynamaxOptions = import('./side').DynamaxOptions;
 type TeamValidator = import('./team-validator').TeamValidator;
 type PokemonSources = import('./team-validator').PokemonSources;
 
@@ -288,6 +289,7 @@ interface ModdedBattlePokemon {
 	getAbility?: (this: Pokemon) => Ability;
 	getActionSpeed?: (this: Pokemon) => number;
 	getItem?: (this: Pokemon) => Item;
+	getDynamaxRequest?: (this: Pokemon, skipChecks?: boolean) => DynamaxOptions | undefined;
 	getMoveRequestData?: (this: Pokemon) => {
 		moves: { move: string, id: ID, target?: string, disabled?: boolean }[],
 		maybeDisabled?: boolean, trapped?: boolean, maybeTrapped?: boolean,
