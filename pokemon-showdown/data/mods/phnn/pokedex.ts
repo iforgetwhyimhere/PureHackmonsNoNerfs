@@ -1,4 +1,4 @@
-export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
+export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	// Gen 1 Special Stat Split Fixes
 	abra: {
 		inherit: true,

@@ -1,4 +1,4 @@
-export const Moves: {[moveid: string]: ModdedMoveData} = {
+export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	// Power Changes
     nihillight: {
 		inherit: true,
@@ -367,7 +367,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 			onTryHit(target, source, move) {
 				if (!move.flags['protect']) {
 					if (['gmaxoneblow', 'gmaxrapidfire'].includes(move.id)) return;
-					if (move.isZ || move.isMax) target.getMoveHitData(move).zBrokeProtect = true;
+					if (move.isZ || move.isMax) target.getMoveHitData(move).bypassProtect = true;
 					return;
 				}
 				if (move.smartTarget) {
@@ -409,7 +409,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 		inherit: true,
 		onEffectiveness(typeMod, target, type) {
 			// Hits through Wonder Guard
-			if (target.hasAbility('wonderguard')) return 1;
+			if (target?.hasAbility('wonderguard')) return 1;
 		},
 	},
 	hyperbeam: {
@@ -452,17 +452,13 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 	// Restore Self-Destruct / Explosion mechanic
 	selfdestruct: {
 		inherit: true,
-		onModifyMove(move, pokemon) {
-			// Cause opposing defenses to be halved
-			move.defensiveCategory = 'Special';
-		},
+		// Damage calculated against the target's Special Defense (replaces removed `defensiveCategory`)
+		overrideDefensiveStat: 'spd',
 	},
 	explosion: {
 		inherit: true,
-		onModifyMove(move, pokemon) {
-			// Cause opposing defenses to be halved
-			move.defensiveCategory = 'Special';
-		},
+		// Damage calculated against the target's Special Defense (replaces removed `defensiveCategory`)
+		overrideDefensiveStat: 'spd',
 	},
 	
 	// Remove move restrictions - signature moves
@@ -474,7 +470,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 		basePower: 0,
 		basePowerCallback(pokemon) {
 			// Variable BP based on IVs (Gen 2-5 formula)
-			const ivs = pokemon.ivs;
+			const ivs = pokemon.set.ivs;
 			const hpTypes = [
 				'Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel',
 				'Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark'
@@ -517,14 +513,13 @@ clangoroussoulblaze: {
 		pp: 5,
 		ignoreAbility: true,
 		isMax: false, // Don't treat as Max Move for damage calculation
-		isZOrMaxPowered: true, // Allow breaking through protect with 25% damage
 		onTryHit(target, source, move) {
 			// Break through Protect/Detect/etc. but NOT Max Guard
 			if (target.volatiles['protect'] || target.volatiles['detect'] ||
 			    target.volatiles['kingsshield'] || target.volatiles['spikyshield'] ||
 			    target.volatiles['banefulbunker'] || target.volatiles['obstruct']) {
 				// These protection moves get broken through
-				target.getMoveHitData(move).zBrokeProtect = true;
+				target.getMoveHitData(move).bypassProtect = true;
 			}
 			// Max Guard blocks completely (no special handling, just let it block)
 		},
@@ -538,14 +533,13 @@ clangoroussoulblaze: {
 		pp: 5,
 		ignoreAbility: true,
 		isMax: false, // Don't treat as Max Move for damage calculation
-		isZOrMaxPowered: true, // Allow breaking through protect with 25% damage
 		onTryHit(target, source, move) {
 			// Break through Protect/Detect/etc. but NOT Max Guard
 			if (target.volatiles['protect'] || target.volatiles['detect'] ||
 			    target.volatiles['kingsshield'] || target.volatiles['spikyshield'] ||
 			    target.volatiles['banefulbunker'] || target.volatiles['obstruct']) {
 				// These protection moves get broken through
-				target.getMoveHitData(move).zBrokeProtect = true;
+				target.getMoveHitData(move).bypassProtect = true;
 			}
 			// Max Guard blocks completely (no special handling, just let it block)
 		},
@@ -559,14 +553,13 @@ clangoroussoulblaze: {
 		pp: 5,
 		ignoreAbility: true,
 		isMax: false, // Don't treat as Max Move for damage calculation
-		isZOrMaxPowered: true, // Allow breaking through protect with 25% damage
 		onTryHit(target, source, move) {
 			// Break through Protect/Detect/etc. but NOT Max Guard
 			if (target.volatiles['protect'] || target.volatiles['detect'] ||
 			    target.volatiles['kingsshield'] || target.volatiles['spikyshield'] ||
 			    target.volatiles['banefulbunker'] || target.volatiles['obstruct']) {
 				// These protection moves get broken through
-				target.getMoveHitData(move).zBrokeProtect = true;
+				target.getMoveHitData(move).bypassProtect = true;
 			}
 			// Max Guard blocks completely (no special handling, just let it block)
 		},

@@ -45,9 +45,9 @@ class BotManager {
    * Either the bot has
    * @return {[type]} [description]
    */
-  team(opponent) {
+  team(format, opponent) {
     if (this.bot.team && typeof this.bot.team === 'function') {
-      return this.bot.team(opponent);
+      return this.bot.team(format, opponent);
     } else if (this.metadata && this.metadata.team) {
       return this.metadata.team;
     }
