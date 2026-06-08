@@ -1,4 +1,4 @@
-export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
+export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormatsDataTable = {
 	// Pure Hackmons No Nerfs - everything is allowed
 	// Since this is Pure Hackmons, we override validation in scripts.ts instead
 	// This file can be minimal since the format allows everything

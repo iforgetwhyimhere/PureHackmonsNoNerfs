@@ -48,16 +48,10 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		}
 	},
 		onBegin() {
-		// Enable all mechanics without restrictions
-		for (const side of this.sides) {
-			side.canMegaEvo = true;
-			side.canUltraBurst = true; 
-			side.canDynamax = true;
-			side.canZMove = true;
-			side.canTerastallize = true;
-		}
-		this.add('raw|<div class="broadcast-blue"><strong>Pure Hackmons No Nerfs</strong><br />Every move is legal, every ability is legal, and every Pokemon across all generations can be played at their peak!</div>');
-	},
+			// In Pure Hackmons every mechanic (Mega, Z-Move, Dynamax, Tera, Ultra Burst) is already
+			// legal through the phnn mod and team validation, so there is nothing to toggle here.
+			this.add('raw|<div class="broadcast-blue"><strong>Pure Hackmons No Nerfs</strong><br />Every move is legal, every ability is legal, and every Pokemon across all generations can be played at their peak!</div>');
+		},
 },
 {
 	name: "[Gen 9] Pure Hackmons No Nerfs Doubles",
@@ -83,16 +77,10 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		}
 	},
 		onBegin() {
-		// Enable all mechanics without restrictions
-		for (const side of this.sides) {
-			side.canMegaEvo = true;
-			side.canUltraBurst = true; 
-			side.canDynamax = true;
-			side.canZMove = true;
-			side.canTerastallize = true;
-		}
-		this.add('raw|<div class="broadcast-blue"><strong>Pure Hackmons No Nerfs</strong><br />Every move is legal, every ability is legal, and every Pokemon across all generations can be played at their peak!</div>');
-	},
+			// In Pure Hackmons every mechanic (Mega, Z-Move, Dynamax, Tera, Ultra Burst) is already
+			// legal through the phnn mod and team validation, so there is nothing to toggle here.
+			this.add('raw|<div class="broadcast-blue"><strong>Pure Hackmons No Nerfs</strong><br />Every move is legal, every ability is legal, and every Pokemon across all generations can be played at their peak!</div>');
+		},
 },
 {
 	name: "[Gen 9] Pure Hackmons No Nerfs Triples",
@@ -118,16 +106,10 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		}
 	},
 		onBegin() {
-		// Enable all mechanics without restrictions
-		for (const side of this.sides) {
-			side.canMegaEvo = true;
-			side.canUltraBurst = true; 
-			side.canDynamax = true;
-			side.canZMove = true;
-			side.canTerastallize = true;
-		}
-		this.add('raw|<div class="broadcast-blue"><strong>Pure Hackmons No Nerfs</strong><br />Every move is legal, every ability is legal, and every Pokemon across all generations can be played at their peak!</div>');
-	},
+			// In Pure Hackmons every mechanic (Mega, Z-Move, Dynamax, Tera, Ultra Burst) is already
+			// legal through the phnn mod and team validation, so there is nothing to toggle here.
+			this.add('raw|<div class="broadcast-blue"><strong>Pure Hackmons No Nerfs</strong><br />Every move is legal, every ability is legal, and every Pokemon across all generations can be played at their peak!</div>');
+		},
 },
 {
 	name: "[Gen 1] Pure Hackmons",

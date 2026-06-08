@@ -211,7 +211,10 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			move.multihitType = 'parentalbond';
 		},
 		// Damage modifier (0.5 for second hit) is handled in formats.ts only
-	},	
+		name: "Parental Bond",
+		rating: 4.5,
+		num: 185,
+	},
 	pixilate: {
 		// Restore original 1.3x damage multiplier
 		inherit: true,

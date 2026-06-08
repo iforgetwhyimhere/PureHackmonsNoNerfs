@@ -1,4 +1,4 @@
-export const Items: {[itemid: string]: ModdedItemData} = {
+export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 	// Classic Items Return
 
 	// Soul Dew - Pre-Gen 7 mechanics (50% boost to Latios/Latias SpAtk and SpDef)
