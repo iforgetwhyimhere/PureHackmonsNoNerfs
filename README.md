@@ -58,7 +58,7 @@ Now open your eyes. **Welcome to Pokémon Pure Hackmons: No Nerfs**, the format 
 - **Classic broken mechanics return** (Toxic/Leech Seed exploit, Paraconfusion buff, Permafreeze, etc.)
 - **Support for Singles, Doubles, and Triples**
 
-> *Note: As of now, the use of Dynamax/Gigantamax is NOT supported on Pokémon Showdown in Gen 9 alongside Terastallize. Additionally, Mega-Evolving/Ultra-Necrozma'ing will NOT allow one to additionally Terastallize afterwards. It's kind of one-or-the-other. However, in an "ideal" PHNN format, this would all be possible.
+> *Note: Dynamax/Gigantamax and Terastallization coexist in Gen 9 PHNN, but each Pokémon may only do one of them per battle (they are mutually exclusive). The choice is made through the Tera type: set a Pokémon's Tera type to **Stellar** to have it **Dynamax** instead of Terastallizing; any other Tera type (including its own primary type) Terastallizes as normal. The one exception is **Terapagos**, which keeps its natural Stellar Terastallization and therefore cannot Dynamax. Mega-Evolving / Ultra-Necrozma'ing still takes priority and will NOT allow an additional Terastallize or Dynamax afterwards.
 
 ---
 

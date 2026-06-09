@@ -704,21 +704,12 @@ export class TeamValidator {
 				set.hpType = type.name;
 			}
 		}
-		if (dex.currentMod === 'phnn') {
-			// Pure Hackmons No Nerfs: Terastallization is opt-in. A Tera type is only kept if the
-			// player explicitly set one; it is NEVER defaulted to the species' first type. An empty
-			// teraType is the signal that this Pokemon should Dynamax instead of Terastallizing
-			// (see data/mods/phnn/scripts.ts: canTerastallize / getDynamaxRequest).
-			if (set.teraType) {
-				const type = dex.types.get(set.teraType);
-				if (!type.exists || type.isNonstandard) {
-					problems.push(`${name}'s Terastal type (${set.teraType}) is invalid.`);
-				} else {
-					set.teraType = type.name;
-				}
-			}
-		} else if ((this.gen === 9 && dex.currentMod !== 'champions' && !ruleTable.has('terastalclause')) ||
+		if ((this.gen === 9 && dex.currentMod !== 'champions' && !ruleTable.has('terastalclause')) ||
 			ruleTable.has('bonustypemod')) {
+			// Pure Hackmons No Nerfs uses the standard Tera-type defaulting here (empty -> primary type,
+			// Terapagos -> its required Stellar type). The Stellar Tera type is the Dynamax signal in PHNN
+			// (see data/mods/phnn/scripts.ts: canTerastallize / getDynamaxRequest); it validates like any
+			// other type because it is not flagged nonstandard.
 			const type = dex.types.get(set.teraType || species.requiredTeraType || species.types[0]);
 			if (!type.exists || type.isNonstandard) {
 				problems.push(`${name}'s Terastal type (${set.teraType}) is invalid.`);

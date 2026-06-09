@@ -36,10 +36,13 @@ export const Scripts: ModdedBattleScriptsData = {
 		},
 
 		// Gen 8 Dynamax support for PHNN, gated by the transformation priority:
-		//   Ultra Burst / Mega Evolution  >  Terastallization (Tera type set)  >  Dynamax (no Tera type)
-		// A Pokemon may only Dynamax if it cannot Ultra Burst / Mega Evolve and its set does NOT specify
-		// a Tera type. The actual Max-move list is built by the base implementation (called with
-		// skipChecks=true); we only customize the eligibility gate here.
+		//   Ultra Burst / Mega Evolution  >  Dynamax (Stellar Tera type)  >  Terastallization (other types)
+		// Dynamax and Terastallization are mutually exclusive per Pokemon, and the player picks between
+		// them through the Tera type: choosing the Stellar Tera type is the signal to Dynamax instead of
+		// Terastallizing. Every other Tera type Terastallizes as normal, so same-type Tera works again
+		// (e.g. Groudon can Tera into Ground). Terapagos is the lone exception: it keeps its natural
+		// Stellar Terastallization and therefore can never Dynamax. The actual Max-move list is built by
+		// the base implementation (called with skipChecks=true); we only customize the eligibility gate.
 		getDynamaxRequest(skipChecks?: boolean) {
 			if (!skipChecks) {
 				if (!this.side.canDynamaxNow()) return;
@@ -50,11 +53,10 @@ export const Scripts: ModdedBattleScriptsData = {
 				) {
 					return;
 				}
-				// A Pokemon Terastallizes (instead of Dynamaxing) only if its Tera type was set to a type
-				// OTHER than its primary type. The teambuilder defaults an unchosen Tera type to the
-				// species' first type, so "Tera type == primary type" counts as "no Tera type chosen"
-				// and the Pokemon Dynamaxes instead. See canTerastallize for the matching gate.
-				if (this.set.teraType && this.set.teraType !== this.species.types[0]) return;
+				// Only a Stellar Tera type Dynamaxes; any other Tera type Terastallizes instead (see
+				// canTerastallize for the matching gate). Terapagos keeps its Stellar Tera, so it is
+				// excluded here and can never Dynamax.
+				if (this.set.teraType !== 'Stellar' || this.species.baseSpecies === 'Terapagos') return;
 				// No Nerfs: the base game's `cannotDynamax` species restriction is intentionally ignored,
 				// so even box legendaries (Zacian, Eternatus, etc.) may Dynamax here.
 			}
@@ -73,14 +75,14 @@ export const Scripts: ModdedBattleScriptsData = {
 	},
 
 	actions: {
-		// Terastallization is only offered when Ultra Burst / Mega Evolution are unavailable AND the set's
-		// Tera type was chosen to be something OTHER than the Pokemon's primary type. Because the
-		// teambuilder defaults an unchosen Tera type to the species' first type, "Tera type == primary
-		// type" is treated as "no Tera type chosen", so the Pokemon Dynamaxes instead (see
-		// getDynamaxRequest above). This keeps Tera and Dynamax mutually exclusive per Pokemon.
+		// Terastallization is offered for every Tera type EXCEPT Stellar, which is reserved as the
+		// Dynamax signal (see getDynamaxRequest above) — this keeps Tera and Dynamax mutually exclusive
+		// per Pokemon while letting a Pokemon Tera into its own primary type again. Terapagos is the lone
+		// exception: it keeps its natural Stellar Terastallization instead of Dynamaxing. Ultra Burst and
+		// Mega Evolution still take priority over Terastallization.
 		canTerastallize(pokemon: Pokemon) {
 			if (pokemon.getItem().zMove || pokemon.canMegaEvo || pokemon.canUltraBurst) return null;
-			if (!pokemon.set.teraType || pokemon.set.teraType === pokemon.species.types[0]) return null;
+			if (pokemon.set.teraType === 'Stellar' && pokemon.species.baseSpecies !== 'Terapagos') return null;
 			return pokemon.teraType;
 		},
 
