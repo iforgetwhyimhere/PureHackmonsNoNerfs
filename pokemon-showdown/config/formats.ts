@@ -112,6 +112,59 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		},
 },
 {
+	name: "[Gen 3] Pure Hackmons No Nerfs",
+	desc: "Gen 3 Pure Hackmons where any ability from the Advanced generation can be used on any Pokemon, as if the Emerald Un-Nerf patch were official.",
+	mod: 'gen3phnn',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+	banlist: [],
+	onValidateSet(set, format, setHas, teamHas) {
+		return [];
+	},
+	onValidateTeam(team, format) {
+		return [];
+	},
+	onBegin() {
+		this.add('raw|<div class="broadcast-blue"><strong>Gen 3 Pure Hackmons No Nerfs</strong><br />Any ability from the Advanced generation can be used on any Pokemon!</div>');
+	},
+},
+{
+	name: "[Gen 6] Pure Hackmons No Nerfs",
+	desc: "Gen 6 Pure Hackmons without the 510 EV limit. Pokemon can have 252 EVs in all 6 stats!",
+	mod: 'gen6',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'Overflow Stat Mod'],
+	banlist: [],
+	onValidateSet(set, format, setHas, teamHas) {
+		return [];
+	},
+	onValidateTeam(team, format) {
+		return [];
+	},
+	onBegin() {
+		this.add('raw|<div class="broadcast-blue"><strong>Gen 6 Pure Hackmons No Nerfs</strong><br />The 510 EV limit has been lifted! Pokemon can have 252 EVs in all 6 stats!</div>');
+	},
+},
+{
+	name: "[Gen 7] Pure Hackmons No Nerfs",
+	desc: "Gen 7 Pure Hackmons with un-nerfed Soul Dew (1.5x SpA/SpD for Lati@s), Parental Bond (50% second hit), Prankster (hits Dark-types), and Gale Wings (works at any HP).",
+	mod: 'gen7phnn',
+	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+	banlist: [],
+	onValidateSet(set, format, setHas, teamHas) {
+		return [];
+	},
+	onValidateTeam(team, format) {
+		return [];
+	},
+	onModifyDamage(damage, source, target, move) {
+		if (move.multihitType === 'parentalbond' && move.hit > 1) {
+			return this.chainModify(2);
+		}
+	},
+	onBegin() {
+		this.add('raw|<div class="broadcast-blue"><strong>Gen 7 Pure Hackmons No Nerfs</strong><br />Soul Dew grants 1.5x SpA/SpD to Lati@s! Parental Bond hits at 50%! Prankster hits Dark-types! Gale Wings works at any HP!</div>');
+	},
+},
+{
 	name: "[Gen 1] Pure Hackmons",
 	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
 	mod: 'gen1',
