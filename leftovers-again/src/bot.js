@@ -1346,13 +1346,14 @@ Adamant Nature
     // Handle normal battle moves
     console.log('=== NORMAL MOVE BRANCH ===');
 
-    // Doubles/Triples: the store leaves state.self.active as an array (length > 1)
-    // and the server needs one move sub-choice per active slot, each single-target
-    // move carrying an explicit target. Build them from the raw request.
-    if (Array.isArray(state.self.active) && state.self.active.length > 1) {
-      const pieces = this.request && Array.isArray(this.request.active) && this.request.active.length > 1
-        ? multibattle.buildMoveChoice(this.request, () => Math.random())
-        : state.self.active.map(() => 'default');
+    // Doubles/Triples: the server needs one move sub-choice per active slot, each
+    // single-target move carrying an explicit target. Detect this from the RAW
+    // request (active.length > 1), NOT from state.self.active: the store collapses
+    // two active Pokemon that share an ident (ex. both Calyrex formes appear as
+    // "p2: Calyrex") into one, which would hide the second slot. Build the choices
+    // straight from the request so slots, moves, and targets all line up.
+    if (this.request && Array.isArray(this.request.active) && this.request.active.length > 1) {
+      const pieces = multibattle.buildMoveChoice(this.request, () => Math.random());
       console.log('=== MULTI-ACTIVE MOVE:', pieces.join(', '), '===');
       return pieces;
     }
