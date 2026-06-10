@@ -134,12 +134,13 @@ handleRequest(json) {
     return false;
   }
 
-  // ADD THIS: Track which requests we've already handled
-  if (this.lastHandledRqid === data.rqid) {
-    console.log(`=== SKIPPING handleRequest: Already processed rqid ${data.rqid} ===`);
-    return false;
-  }
-  this.lastHandledRqid = data.rqid;
+  // NOTE: We intentionally do NOT skip a request whose rqid we've already seen.
+  // When the server rejects a choice (ex. a move that's out of PP, or switching
+  // a trapped Pokemon), it re-sends the SAME request with the SAME rqid so we can
+  // try again. Skipping that retry left the bot silent until it timed out. The
+  // bot's own per-rqid guard (see bot.js decide) returns nothing on a repeat, and
+  // formatMessage turns that into a guaranteed-legal `/choose default`, so a
+  // rejected choice escalates to a safe default instead of hanging.
 
   if (data.teamPreview) {
     this.decide();
@@ -361,9 +362,15 @@ handleTurn(turn) { // eslint-disable-line
         }, forfeitTimeout);
       }
     } catch (e) {
-      Log.error('Forfeiting because of the following error:');
+      // A bug while deciding shouldn't cost us the game: send the server's
+      // guaranteed-legal default choice and keep playing.
+      Log.error('Error while deciding; sending default choice instead:');
       Log.error(e);
-      this.forfeit();
+      if (state && state.rqid) {
+        listener.relay('_send', `${this.bid}|/choose default|${state.rqid}`);
+      } else {
+        this.forfeit();
+      }
     }
   }
 
@@ -421,7 +428,17 @@ forfeit() {
     Log.debug('choice: ' + JSON.stringify(choice));
     let verb;
 
-    // if you're wondering why this 'if' statement is so wonky... it's technical debt!
+    // A guaranteed-legal fallback: the server picks the first available move/switch
+    // and target for us. We send this instead of forfeiting (or going silent)
+    // whenever we can't turn the bot's choice into a valid command, so a rejected
+    // or missing choice never costs us the game.
+    const fallback = `${bid}|/choose default|${state.rqid}`;
+
+    // No choice (ex. the bot's per-rqid guard fired on a retry): send default.
+    if (!choice) {
+      return fallback;
+    }
+
     // Doubles/Triples: the bot returns an array of already-formatted per-slot
     // sub-choices (ex. ['move 1 2', 'switch 4', 'pass']). Join them into a single
     // /choose command, which is the multi-slot form the server expects.
@@ -435,8 +452,7 @@ forfeit() {
     if (choice instanceof MOVE || choice.type === 'move') {
       const moveIdx = this.lookupMoveIdx(state.self.active.moves, choice.id);
       if (moveIdx < 0) {
-        this.forfeit();
-        return '';
+        return fallback;
       }
 
       verb = `/move ${moveIdx + 1}`; // move indexes for the server are [1..4]
@@ -453,10 +469,12 @@ forfeit() {
         : '/switch';
       const monIdx = this.lookupMonIdx(state.self.reserve, choice.id);
       if (monIdx < 0) {
-        this.forfeit();
-        return '';
+        return fallback;
       }
       verb = `${verb} ${monIdx + 1}`; // switch indexes for the server are [1..6]
+    } else {
+      // Unrecognized choice shape: fall back rather than send a malformed command.
+      return fallback;
     }
     return `${bid}|${verb}|${state.rqid}`;
   }
