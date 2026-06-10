@@ -422,6 +422,13 @@ forfeit() {
     let verb;
 
     // if you're wondering why this 'if' statement is so wonky... it's technical debt!
+    // Doubles/Triples: the bot returns an array of already-formatted per-slot
+    // sub-choices (ex. ['move 1 2', 'switch 4', 'pass']). Join them into a single
+    // /choose command, which is the multi-slot form the server expects.
+    if (Array.isArray(choice)) {
+      return `${bid}|/choose ${choice.join(', ')}|${state.rqid}`;
+    }
+
     // in 0.7.7 and lower, you had to check instanceof. But that check doesn't work
     // so well when it comes to cross-compatibility. So I added the 'type' property
     // to 'choice' which is less error-prone.
