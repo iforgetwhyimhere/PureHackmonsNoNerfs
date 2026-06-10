@@ -179,6 +179,75 @@ it('buildMoveChoice builds one sub-choice per active slot', () => {
   assert.deepStrictEqual(pieces, ['move 1 2', 'move 1']);
 });
 
+it('attaches targets for the real two-Calyrex Doubles request (regression)', () => {
+  // Exact request that failed live ("Psyshock needs a target"): two same-ident
+  // Calyrex. Pick the second move on each slot (a normal-target move) and confirm
+  // both sub-choices carry an explicit foe target.
+  const request = {
+    active: [
+      {
+        moves: [
+          { move: 'Astral Barrage', id: 'astralbarrage', target: 'allAdjacentFoes', disabled: false },
+          { move: 'Psyshock', id: 'psyshock', target: 'normal', disabled: false },
+          { move: 'Draining Kiss', id: 'drainingkiss', target: 'normal', disabled: false },
+          { move: 'Nasty Plot', id: 'nastyplot', target: 'self', disabled: false },
+        ],
+        canTerastallize: 'Psychic',
+      },
+      {
+        moves: [
+          { move: 'Glacial Lance', id: 'glaciallance', target: 'allAdjacentFoes', disabled: false },
+          { move: 'High Horsepower', id: 'highhorsepower', target: 'normal', disabled: false },
+          { move: 'Trick Room', id: 'trickroom', target: 'all', disabled: false },
+          { move: 'Swords Dance', id: 'swordsdance', target: 'self', disabled: false },
+        ],
+        canTerastallize: 'Psychic',
+      },
+    ],
+  };
+  // rng sequence per slot: [transform-roll=0.99 (decline), move-pick=0.3 (index 1)]
+  const vals = [0.99, 0.3, 0.99, 0.3];
+  let n = 0;
+  const seq = () => vals[n++];
+  const pieces = mb.buildMoveChoice(request, seq);
+  assert.deepStrictEqual(pieces, ['move 2 2', 'move 2 1']);
+});
+
+it('every sub-choice for the Doubles request is well-formed for any rng', () => {
+  const request = {
+    active: [
+      {
+        moves: [
+          { id: 'astralbarrage', target: 'allAdjacentFoes', disabled: false },
+          { id: 'psyshock', target: 'normal', disabled: false },
+          { id: 'drainingkiss', target: 'normal', disabled: false },
+          { id: 'nastyplot', target: 'self', disabled: false },
+        ],
+        canTerastallize: 'Psychic',
+      },
+      {
+        moves: [
+          { id: 'glaciallance', target: 'allAdjacentFoes', disabled: false },
+          { id: 'highhorsepower', target: 'normal', disabled: false },
+          { id: 'trickroom', target: 'all', disabled: false },
+          { id: 'swordsdance', target: 'self', disabled: false },
+        ],
+        canTerastallize: 'Psychic',
+      },
+    ],
+  };
+  const wellFormed = /^(pass|default|move \d+( -?\d+)?( (mega|megax|megay|ultra|zmove|dynamax|terastallize))?)$/;
+  for (let trial = 0; trial < 200; trial++) {
+    const pieces = mb.buildMoveChoice(request);
+    assert.strictEqual(pieces.length, 2, 'should have one sub-choice per active slot');
+    for (const p of pieces) {
+      assert.ok(wellFormed.test(p), `malformed sub-choice: "${p}"`);
+    }
+    // At most one slot may Terastallize in a single turn.
+    assert.ok(pieces.filter(p => p.endsWith('terastallize')).length <= 1);
+  }
+});
+
 // --- buildSwitchChoice -----------------------------------------------------
 it('buildSwitchChoice switches forced slots to distinct benched mons', () => {
   const request = {
