@@ -15,7 +15,8 @@ function it(name, fn) {
   console.log(`  ok - ${name}`);
 }
 
-const zero = () => 0; // deterministic rng: always picks the first option
+const zero = () => 0; // deterministic rng: always picks the first option / always transforms
+const never = () => 0.99; // deterministic rng: never transforms (>= TRANSFORM_CHANCE)
 
 // --- mirrorFoeTarget -------------------------------------------------------
 it('mirrorFoeTarget returns the opposite foe slot', () => {
@@ -84,27 +85,86 @@ it('pickTargetLoc picks an adjacent ally, or null when none', () => {
 // --- buildMovePiece --------------------------------------------------------
 it('buildMovePiece adds a target for single-target moves', () => {
   const slotReq = { moves: [{ id: 'tackle', target: 'normal', disabled: false }] };
-  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], zero), 'move 1 2');
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], new Set(), zero), 'move 1 2');
 });
 
 it('buildMovePiece omits a target for spread/self moves', () => {
   const slotReq = { moves: [{ id: 'earthquake', target: 'allAdjacent', disabled: false }] };
-  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], zero), 'move 1');
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], new Set(), zero), 'move 1');
 });
 
 it('buildMovePiece passes for a commanding slot', () => {
-  assert.strictEqual(mb.buildMovePiece({ commanding: true }, 0, 2, [true, true], zero), 'pass');
+  assert.strictEqual(mb.buildMovePiece({ commanding: true }, 0, 2, [true, true], new Set(), zero), 'pass');
 });
 
 it('buildMovePiece defaults when no move is usable', () => {
   const slotReq = { moves: [{ id: 'tackle', target: 'normal', disabled: true }] };
-  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], zero), 'default');
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], new Set(), zero), 'default');
 });
 
 it('buildMovePiece skips moves whose target cannot be satisfied', () => {
   // Only move is an adjacentAlly move but the ally is gone -> falls back to default.
   const slotReq = { moves: [{ id: 'helpinghand', target: 'adjacentAlly', disabled: false }] };
-  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, false], zero), 'default');
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, false], new Set(), zero), 'default');
+});
+
+// --- battle mechanics (Mega / Ultra / Z / Dynamax / Tera) ------------------
+it('chooseTransform offers nothing when the rng declines', () => {
+  const slotReq = { moves: [{ id: 'tackle', target: 'normal' }], canTerastallize: 'Steel' };
+  assert.strictEqual(mb.chooseTransform(slotReq, new Set(), never), null);
+});
+
+it('chooseTransform skips a mechanic already claimed this turn', () => {
+  const slotReq = { canMegaEvo: true, moves: [{ id: 'tackle', target: 'normal' }] };
+  assert.strictEqual(mb.chooseTransform(slotReq, new Set(['mega']), zero), null);
+});
+
+it('buildMovePiece appends the terastallize event', () => {
+  const slotReq = { moves: [{ id: 'tackle', target: 'normal', disabled: false }], canTerastallize: 'Steel' };
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], new Set(), zero), 'move 1 2 terastallize');
+});
+
+it('buildMovePiece appends the mega event', () => {
+  const slotReq = { moves: [{ id: 'flamethrower', target: 'normal', disabled: false }], canMegaEvo: true };
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], new Set(), zero), 'move 1 2 mega');
+});
+
+it('buildMovePiece dynamaxes using the Max Move target (adjacentFoe)', () => {
+  const slotReq = {
+    moves: [{ id: 'tackle', target: 'normal', disabled: false }],
+    canDynamax: true,
+    maxMoves: { maxMoves: [{ move: 'maxstrike', target: 'adjacentFoe', disabled: false }] },
+  };
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], new Set(), zero), 'move 1 2 dynamax');
+});
+
+it('buildMovePiece keeps using Max Moves while already Dynamaxed (no event)', () => {
+  // Already dynamaxed: maxMoves present, canDynamax absent. Status Max Move -> Max Guard (self, no target).
+  const slotReq = {
+    moves: [{ id: 'tackle', target: 'normal', disabled: false }],
+    maxMoves: { maxMoves: [{ move: 'maxguard', target: 'self', disabled: false }] },
+  };
+  assert.strictEqual(mb.buildMovePiece(slotReq, 0, 2, [true, true], new Set(), zero), 'move 1');
+});
+
+it('buildMovePiece uses the z-move target from canZMove', () => {
+  const slotReq = {
+    moves: [{ id: 'tackle', target: 'normal', disabled: false }],
+    canZMove: [{ move: 'Breakneck Blitz', target: 'normal' }],
+  };
+  assert.strictEqual(mb.buildMovePiece(slotReq, 1, 2, [true, true], new Set(), zero), 'move 1 1 zmove');
+});
+
+it('buildMoveChoice never uses the same mechanic on two slots in one turn', () => {
+  const request = {
+    active: [
+      { moves: [{ id: 'a', target: 'normal', disabled: false }], canTerastallize: 'Steel' },
+      { moves: [{ id: 'b', target: 'normal', disabled: false }], canTerastallize: 'Fire' },
+    ],
+  };
+  const pieces = mb.buildMoveChoice(request, zero);
+  const teras = pieces.filter(p => p.endsWith('terastallize'));
+  assert.strictEqual(teras.length, 1, `only one slot should Terastallize, got: ${pieces.join(' | ')}`);
 });
 
 // --- buildMoveChoice -------------------------------------------------------
