@@ -4,6 +4,7 @@
  */
 const { MOVE, SWITCH } = require('@la/decisions');
 const PHNN_TEAMS = require('./phnn-teams.js');
+const multibattle = require('./multibattle');
 
 class MultiFormatBot {
   constructor() {
@@ -1314,6 +1315,14 @@ Adamant Nature
     if (state.forceSwitch) {
       console.log('=== FORCE SWITCH BRANCH ===');
 
+      // Doubles/Triples: the server forces one or more slots to switch and needs a
+      // sub-choice per active slot. Build them all from the raw request.
+      if (this.request && Array.isArray(this.request.forceSwitch) && this.request.forceSwitch.length > 1) {
+        const pieces = multibattle.buildSwitchChoice(this.request);
+        console.log('=== MULTI-ACTIVE FORCE SWITCH:', pieces.join(', '), '===');
+        return pieces;
+      }
+
       const availableIndices = [];
       for (let i = 0; i < (state.self.reserve || []).length; i++) {
         const mon = state.self.reserve[i];
@@ -1336,6 +1345,18 @@ Adamant Nature
 
     // Handle normal battle moves
     console.log('=== NORMAL MOVE BRANCH ===');
+
+    // Doubles/Triples: the store leaves state.self.active as an array (length > 1)
+    // and the server needs one move sub-choice per active slot, each single-target
+    // move carrying an explicit target. Build them from the raw request.
+    if (Array.isArray(state.self.active) && state.self.active.length > 1) {
+      const pieces = this.request && Array.isArray(this.request.active) && this.request.active.length > 1
+        ? multibattle.buildMoveChoice(this.request, () => Math.random())
+        : state.self.active.map(() => 'default');
+      console.log('=== MULTI-ACTIVE MOVE:', pieces.join(', '), '===');
+      return pieces;
+    }
+
     if (!state.self.active || !state.self.active.moves) {
       console.log('No active Pokemon or moves, using struggle');
       return new MOVE('struggle');
