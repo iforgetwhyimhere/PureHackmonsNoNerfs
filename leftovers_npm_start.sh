@@ -24,6 +24,7 @@ PROJECT_DIR="$1"
 BOT_NICKNAME="$2"
 VENV_DIR="$3"
 NODE_VERSION="$4"
+BOT_PASSWORD="$5"
 
 # --- Create virtual environment if it doesn't exist ---
 if [ ! -f "$VENV_DIR/bin/activate" ]; then
@@ -52,6 +53,7 @@ fi
 unset NPM_CONFIG_PREFIX
 unset npm_config_prefix
 export BOT_NICKNAME="$BOT_NICKNAME"
+export BOT_PASSWORD="$BOT_PASSWORD"
 cd "$PROJECT_DIR/leftovers-again"
 
 echo "=========================================="
@@ -78,4 +80,4 @@ INNER_EOF
 chmod +x /tmp/leftovers_start.sh
 
 # Open terminal and run the script, passing config as arguments
-gnome-terminal -- /tmp/leftovers_start.sh "$PROJECT_DIR" "$BOT_NICKNAME" "$VENV_DIR" "$NODE_VERSION"
+gnome-terminal -- /tmp/leftovers_start.sh "$PROJECT_DIR" "$BOT_NICKNAME" "$VENV_DIR" "$NODE_VERSION" "$BOT_PASSWORD"
