@@ -13,6 +13,11 @@ class MultiFormatBot {
       format: null,
       version: '2.0',
       nickname: process.env.BOT_NICKNAME || 'MultiBot',
+      // Password for a REGISTERED Showdown account (set BOT_PASSWORD in .env).
+      // Leave it empty/unset to log in as an unregistered guest name. A registered
+      // nickname MUST have its password here, or the login server rejects the
+      // password-less login and the bot renames itself with random digits.
+      password: process.env.BOT_PASSWORD || null,
     };
     
     // Store complete 6-Pokemon teams organized by format
