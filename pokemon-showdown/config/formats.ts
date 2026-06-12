@@ -23,7 +23,8 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	///////////////////////////////////////////////////////////////////
 
 {
-	section: "Hackmons Formats",
+	section: "No Nerfs",
+	column: 1,
 },
 {
 	name: "[Gen 9] Pure Hackmons No Nerfs",
@@ -165,6 +166,10 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	},
 },
 {
+	section: "All Gens PH",
+	column: 1,
+},
+{
 	name: "[Gen 1] Pure Hackmons",
 	desc: "Anything directly hackable onto a set and usable in local battles is allowed.",
 	mod: 'gen1',
@@ -231,6 +236,10 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	ruleset: ['-Nonexistent', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
 },
 {
+	section: "Wondrous Hackmons",
+	column: 2,
+},
+{
 	name: "[Gen 9] Wondrous Hackmons",
 	desc: "A custom Hackmons format with select bans for a balanced experience.",
 	mod: 'gen9',
@@ -257,6 +266,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "S/V Singles",
+		column: 2,
 	},
 	{
 		name: "[Gen 9] Random Battle",
@@ -393,6 +403,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "S/V Doubles",
+		column: 2,
 	},
 	{
 		name: "[Gen 9] Random Doubles Battle",
@@ -484,6 +495,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Champions",
+		column: 2,
 	},
 	{
 		name: "[Gen 9 Champions] OU",
@@ -531,6 +543,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Unofficial Metagames",
+		column: 2,
 	},
 	{
 		name: "[Gen 9] 1v1",
@@ -647,7 +660,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Draft",
-		column: 1,
+		column: 3,
 	},
 	{
 		name: "[Gen 9] Draft",
@@ -764,7 +777,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Ladder Spotlight",
-		column: 2,
+		column: 3,
 	},
 	{
 		name: "[Gen 9] Mega Invasion Random Battle",
@@ -1070,7 +1083,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Other Metagames",
-		column: 2,
+		column: 3,
 	},
 	{
 		name: "[Gen 9] Almost Any Ability",
@@ -1343,7 +1356,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Challengeable OMs",
-		column: 2,
+		column: 3,
 	},
 	{
 		name: "[Gen 9] 1-2 Switch",
@@ -3330,6 +3343,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Temporary Tour Metas",
+		column: 5,
 	},
 	{
 		name: "[Gen 9] Mix and Mega LC",
@@ -3404,6 +3418,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "National Dex",
+		column: 5,
 	},
 	{
 		name: "[Gen 9] National Dex",
@@ -3426,6 +3441,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "National Dex Other Tiers",
+		column: 5,
 	},
 	{
 		name: "[Gen 9] National Dex Ubers",
@@ -3707,6 +3723,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Pet Mods",
+		column: 5,
 	},
 	{
 		name: "[Gen 9] woomod", // roomtours
@@ -3797,7 +3814,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Randomized Metas",
-		column: 3,
+		column: 5,
 	},
 	{
 		name: "[Gen 9] Random Roulette",
@@ -4417,7 +4434,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Past Gens OU",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 8] OU",
@@ -4473,7 +4490,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Past Gens Doubles OU",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 8] Doubles OU",
@@ -4528,7 +4545,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Sw/Sh Singles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 8] Ubers",
@@ -4665,7 +4682,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Sw/Sh Doubles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 8] Doubles Ubers",
@@ -4738,7 +4755,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	///////////////////////////////////////////////////////////////////
 	{
 		section: "US/UM Singles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 7] UU",
@@ -4857,7 +4874,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "US/UM Doubles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 7] Doubles UU",
@@ -4931,7 +4948,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "OR/AS Singles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 6] Ubers",
@@ -5053,7 +5070,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "OR/AS Doubles/Triples",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 6] VGC 2016",
@@ -5124,7 +5141,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "B2/W2 Singles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 5] Ubers",
@@ -5242,7 +5259,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "B2/W2 Doubles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 5] VGC 2013",
@@ -5297,7 +5314,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "DPP Singles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 4] Ubers",
@@ -5390,7 +5407,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "DPP Doubles",
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 4] VGC 2009",
@@ -5417,7 +5434,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 
 	{
 		section: "Past Generations",
-		column: 4,
+		column: 6,
 	},
 	{
 		name: "[Gen 3] Ubers",
