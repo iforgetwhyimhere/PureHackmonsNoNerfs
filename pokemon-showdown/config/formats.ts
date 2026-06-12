@@ -238,6 +238,10 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	banlist: [
 		'Arena Trap', 'Innards Out', 'Last Respects', 'Neutralizing Gas', 'Revival Blessing', 'Shadow Tag', 'Shed Tail',
 	],
+	// Allow dexited Pokemon (cut from Scarlet/Violet, tagged isNonstandard: "Past").
+	// '-Nonexistent' bans every nonstandard tag at once; '+Past'/'+Unobtainable' are
+	// existence-tag unbans that specifically trump it (see sim/team-validator.ts).
+	unbanlist: ['Past', 'Unobtainable'],
 },
 {
 	name: "[Gen 8] Wondrous Hackmons",
